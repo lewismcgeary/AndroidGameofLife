@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="@dimen/cell_size"
+    android:height="@dimen/cell_size"
+    android:viewportHeight="24"
+    android:viewportWidth="24">
+<group
+    android:name="whole cell"
+    android:pivotX="12"
+    android:pivotY="12"
+    android:rotation="90">
+    <clip-path
+        android:name="tentacle clip path"
+        android:pathData="@string/dead_cell_clip_path" />
+    <path
+        android:pathData="@string/short_tentacle_path"
+        android:strokeColor="@android:color/holo_red_dark"
+        android:strokeWidth="2.0" />
+    <path
+        android:pathData="@string/diagonal_tentacle_path"
+        android:strokeColor="@android:color/holo_red_dark"
+        android:strokeWidth="2.0" />
+    <group
+        android:pivotX="12"
+        android:pivotY="12"
+        android:rotation="90">
+
+        <path
+            android:pathData="@string/short_tentacle_path"
+            android:strokeColor="@android:color/holo_red_dark"
+            android:strokeWidth="2.0" />
+        <path
+            android:pathData="@string/diagonal_tentacle_path"
+            android:strokeColor="@android:color/holo_red_dark"
+            android:strokeWidth="2.0" />
+
+    </group>
+</group>
+</vector>
