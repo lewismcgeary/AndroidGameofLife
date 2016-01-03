@@ -2,6 +2,7 @@ package io.github.lewismcgeary.androidgameoflife;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,6 +18,17 @@ GridPresenter worldGridPresenter;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         worldGridLayout = (LifeGridLayout)findViewById(R.id.life_grid_layout);
+        //Calculate number of columns and rows to fit device
+        worldGridLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                int densityOfScreen = DisplayMetrics.DENSITY_DEFAULT;
+                //get the width and height of grid in dp
+                int gridWidth = worldGridLayout.getMeasuredWidth()/(densityOfScreen/160);
+                int gridHeight = worldGridLayout.getMeasuredHeight()/(densityOfScreen/160);
+            }
+        });
+
         worldGridPresenter = new GridPresenter(this, worldGridLayout);
         worldGridPresenter.setInitialState();
         final Button startResetButton = (Button)findViewById(R.id.start_reset_button);
