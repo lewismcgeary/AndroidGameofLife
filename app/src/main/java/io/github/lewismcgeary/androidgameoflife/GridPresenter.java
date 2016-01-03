@@ -1,6 +1,5 @@
 package io.github.lewismcgeary.androidgameoflife;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 
@@ -12,15 +11,12 @@ import java.util.List;
 public class GridPresenter {
     Grid worldGrid;
     LifeGridLayout worldGridLayout;
-    int coordinates[][];
-    //Context context;
     int moveDuration;
 
-    public GridPresenter(Context context, LifeGridLayout newWorldGridLayout) {
-       // this.context = context;
-        worldGrid = new Grid(context.getResources().getInteger(R.integer.grid_width),context.getResources().getInteger(R.integer.grid_height));
+    public GridPresenter(LifeGridLayout newWorldGridLayout, int moveDuration) {
         worldGridLayout = newWorldGridLayout;
-        moveDuration = context.getResources().getInteger(R.integer.move_duration);
+        worldGrid = new Grid(worldGridLayout.getColumnCount(), worldGridLayout.getRowCount());
+        this.moveDuration = moveDuration;
 
     }
 
