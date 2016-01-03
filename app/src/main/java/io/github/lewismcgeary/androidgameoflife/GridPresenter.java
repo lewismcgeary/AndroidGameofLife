@@ -11,12 +11,9 @@ import java.util.List;
 public class GridPresenter {
     Grid worldGrid;
     LifeGridLayout worldGridLayout;
-    int coordinates[][];
-    //Context context;
     int moveDuration;
 
     public GridPresenter(LifeGridLayout newWorldGridLayout, int moveDuration) {
-       // this.context = context;
         worldGridLayout = newWorldGridLayout;
         worldGrid = new Grid(worldGridLayout.getColumnCount(), worldGridLayout.getRowCount());
         this.moveDuration = moveDuration;
