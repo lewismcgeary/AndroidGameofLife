@@ -15,10 +15,10 @@ public class GridPresenter {
     //Context context;
     int moveDuration;
 
-    public GridPresenter(LifeGridLayout newWorldGridLayout, int numberOfColumns, int numberOfRows, int moveDuration) {
+    public GridPresenter(LifeGridLayout newWorldGridLayout, int moveDuration) {
        // this.context = context;
-        worldGrid = new Grid(numberOfColumns, numberOfRows);
         worldGridLayout = newWorldGridLayout;
+        worldGrid = new Grid(worldGridLayout.getColumnCount(), worldGridLayout.getRowCount());
         this.moveDuration = moveDuration;
 
     }
