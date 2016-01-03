@@ -19,18 +19,19 @@ GridPresenter worldGridPresenter;
         worldGridLayout = (LifeGridLayout)findViewById(R.id.life_grid_layout);
         worldGridPresenter = new GridPresenter(this, worldGridLayout);
         worldGridPresenter.setInitialState();
-        Button startButton = (Button)findViewById(R.id.start_button);
-        startButton.setOnClickListener(new View.OnClickListener() {
+        final Button startResetButton = (Button)findViewById(R.id.start_reset_button);
+        final String startButtonText = getString(R.string.start_button_text);
+        final String resetButtonText = getString(R.string.reset_button_text);
+        startResetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                worldGridPresenter.passLiveCellsToModelAndStartGame();
-            }
-        });
-        Button resetButton = (Button)findViewById(R.id.reset_button);
-        resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                worldGridPresenter.resetGrid();
+                if (startResetButton.getText().equals(startButtonText)) {
+                    startResetButton.setText(resetButtonText);
+                    worldGridPresenter.passLiveCellsToModelAndStartGame();
+                } else {
+                    startResetButton.setText(startButtonText);
+                    worldGridPresenter.resetGrid();
+                }
             }
         });
     }
