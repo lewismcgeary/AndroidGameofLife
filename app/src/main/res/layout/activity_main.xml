@@ -10,8 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/life_grid_layout"
-        android:columnCount="@integer/grid_width"
-        android:rowCount="@integer/grid_height"
         android:clickable="false"
          />
     <Button

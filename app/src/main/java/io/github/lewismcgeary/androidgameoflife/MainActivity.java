@@ -23,14 +23,19 @@ GridPresenter worldGridPresenter;
             @Override
             public void run() {
                 int densityOfScreen = DisplayMetrics.DENSITY_DEFAULT;
+                int cellSize = (int) getResources().getDimension(R.dimen.cell_size);
+                int moveDuration = getResources().getInteger(R.integer.move_duration);
                 //get the width and height of grid in dp
-                int gridWidth = worldGridLayout.getMeasuredWidth()/(densityOfScreen/160);
-                int gridHeight = worldGridLayout.getMeasuredHeight()/(densityOfScreen/160);
+                int gridWidth = worldGridLayout.getMeasuredWidth() / (densityOfScreen / 160);
+                int gridHeight = worldGridLayout.getMeasuredHeight() / (densityOfScreen / 160);
+                int numberOfColumns = gridWidth/cellSize;
+                int numberOfRows = gridHeight/cellSize;
+                worldGridLayout.setColumnCount(numberOfColumns);
+                worldGridLayout.setRowCount(numberOfRows);
+                worldGridPresenter = new GridPresenter(worldGridLayout, numberOfColumns, numberOfRows, moveDuration);
+                worldGridPresenter.setInitialState();
             }
         });
-
-        worldGridPresenter = new GridPresenter(this, worldGridLayout);
-        worldGridPresenter.setInitialState();
         final Button startResetButton = (Button)findViewById(R.id.start_reset_button);
         final String startButtonText = getString(R.string.start_button_text);
         final String resetButtonText = getString(R.string.reset_button_text);
