@@ -1,6 +1,7 @@
 package io.github.lewismcgeary.androidgameoflife;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
                 setUpGrid();
             }
         });
+        final FloatingActionButton startResetFab = (FloatingActionButton)findViewById(R.id.start_reset_fab);
         final Button startResetButton = (Button)findViewById(R.id.start_reset_button);
         final String startButtonText = getString(R.string.start_button_text);
         final String resetButtonText = getString(R.string.reset_button_text);
@@ -31,6 +33,18 @@ public class MainActivity extends AppCompatActivity {
                     worldGridPresenter.passLiveCellsToModelAndStartGame();
                 } else {
                     startResetButton.setText(startButtonText);
+                    worldGridPresenter.resetGrid();
+                }
+            }
+        });
+        startResetFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (startResetFab.getTag().equals(startButtonText)) {
+                    startResetFab.setTag(resetButtonText);
+                    worldGridPresenter.passLiveCellsToModelAndStartGame();
+                } else {
+                    startResetFab.setTag(startButtonText);
                     worldGridPresenter.resetGrid();
                 }
             }

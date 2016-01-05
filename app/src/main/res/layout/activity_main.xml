@@ -27,5 +27,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         app:elevation="4dp"
+        android:tag="@string/start_button_text"
         />
 </RelativeLayout>
