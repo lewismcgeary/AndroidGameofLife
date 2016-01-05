@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity {
     GridPresenter worldGridPresenter;
@@ -51,6 +52,17 @@ public class MainActivity extends AppCompatActivity {
         //calculate number of columns and rows that will fit on screen
         int numberOfColumns = gridWidth/cellSize;
         int numberOfRows = gridHeight/cellSize;
+        //calculate the margins needed to centre the cells in the layout
+        float unusedWidthDp = gridWidth - numberOfColumns * cellSize;
+        float unusedHeightDp = gridHeight - numberOfRows * cellSize;
+        float unusedWidthPx = unusedWidthDp * (densityOfScreen / 160);
+        float unusedHeightPx = unusedHeightDp * (densityOfScreen / 160);
+        int leftRightMargin = (int) unusedWidthPx / 2;
+        int topBottomMargin = (int) unusedHeightPx / 2;
+        //apply the calculated values
+        FrameLayout.LayoutParams worldGridLayoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        worldGridLayoutParams.setMargins(leftRightMargin, topBottomMargin, leftRightMargin, topBottomMargin);
+        worldGridLayout.setLayoutParams(worldGridLayoutParams);
         worldGridLayout.setColumnCount(numberOfColumns);
         worldGridLayout.setRowCount(numberOfRows);
         worldGridPresenter = new GridPresenter(worldGridLayout, moveDuration);
