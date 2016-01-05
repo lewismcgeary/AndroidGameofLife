@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     GridPresenter worldGridPresenter;
@@ -23,23 +22,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         final FloatingActionButton startResetFab = (FloatingActionButton)findViewById(R.id.start_reset_fab);
-        final Button startResetButton = (Button)findViewById(R.id.start_reset_button);
         final String startButtonText = getString(R.string.start_button_text);
         final String resetButtonText = getString(R.string.reset_button_text);
         final Drawable playIcon = getDrawable(R.drawable.ic_play_arrow_24dp);
         final Drawable resetIcon = getDrawable(R.drawable.ic_replay_24dp);
-        startResetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (startResetButton.getText().equals(startButtonText)) {
-                    startResetButton.setText(resetButtonText);
-                    worldGridPresenter.passLiveCellsToModelAndStartGame();
-                } else {
-                    startResetButton.setText(startButtonText);
-                    worldGridPresenter.resetGrid();
-                }
-            }
-        });
         startResetFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
