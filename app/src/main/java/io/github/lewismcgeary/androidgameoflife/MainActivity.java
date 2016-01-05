@@ -1,5 +1,6 @@
 package io.github.lewismcgeary.androidgameoflife;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         final Button startResetButton = (Button)findViewById(R.id.start_reset_button);
         final String startButtonText = getString(R.string.start_button_text);
         final String resetButtonText = getString(R.string.reset_button_text);
+        final Drawable playIcon = getDrawable(R.drawable.ic_play_arrow_24dp);
+        final Drawable resetIcon = getDrawable(R.drawable.ic_replay_24dp);
         startResetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,9 +45,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (startResetFab.getTag().equals(startButtonText)) {
                     startResetFab.setTag(resetButtonText);
+                    startResetFab.setImageDrawable(resetIcon);
                     worldGridPresenter.passLiveCellsToModelAndStartGame();
                 } else {
                     startResetFab.setTag(startButtonText);
+                    startResetFab.setImageDrawable(playIcon);
                     worldGridPresenter.resetGrid();
                 }
             }
