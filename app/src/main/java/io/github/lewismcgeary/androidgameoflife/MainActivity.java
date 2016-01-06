@@ -3,6 +3,7 @@ package io.github.lewismcgeary.androidgameoflife;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -11,6 +12,12 @@ import android.widget.FrameLayout;
 public class MainActivity extends AppCompatActivity {
     GridPresenter worldGridPresenter;
     LifeGridLayout worldGridLayout;
+    FloatingActionButton startResetFab;
+    String startButtonText;
+    String resetButtonText;
+    Drawable playIcon;
+    Drawable resetIcon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,21 +29,19 @@ public class MainActivity extends AppCompatActivity {
                 setUpGrid();
             }
         });
-        final FloatingActionButton startResetFab = (FloatingActionButton)findViewById(R.id.start_reset_fab);
-        final String startButtonText = getString(R.string.start_button_text);
-        final String resetButtonText = getString(R.string.reset_button_text);
-        final Drawable playIcon = getDrawable(R.drawable.ic_play_arrow_24dp);
-        final Drawable resetIcon = getDrawable(R.drawable.ic_replay_24dp);
+        startResetFab = (FloatingActionButton)findViewById(R.id.start_reset_fab);
+        startButtonText = getString(R.string.start_button_text);
+        resetButtonText = getString(R.string.reset_button_text);
+        playIcon = getDrawable(R.drawable.ic_play_arrow_24dp);
+        resetIcon = getDrawable(R.drawable.ic_replay_24dp);
         startResetFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (startResetFab.getTag().equals(startButtonText)) {
-                    startResetFab.setTag(resetButtonText);
-                    startResetFab.setImageDrawable(resetIcon);
+                    showButtonInResetMode();
                     worldGridPresenter.passLiveCellsToModelAndStartGame();
                 } else {
-                    startResetFab.setTag(startButtonText);
-                    startResetFab.setImageDrawable(playIcon);
+                    showButtonInStartMode();
                     worldGridPresenter.resetGrid();
                 }
             }
@@ -67,5 +72,20 @@ public class MainActivity extends AppCompatActivity {
         worldGridLayout.setRowCount(numberOfRows);
         worldGridPresenter = new GridPresenter(worldGridLayout, moveDuration);
         worldGridPresenter.setInitialState();
+    }
+
+    private void showButtonInStartMode(){
+        startResetFab.setTag(startButtonText);
+        startResetFab.setImageDrawable(playIcon);
+    }
+
+    private void showButtonInResetMode(){
+        startResetFab.setTag(resetButtonText);
+        startResetFab.setImageDrawable(resetIcon);
+    }
+
+    public void gameOver(){
+        Snackbar.make(startResetFab, "They're dead, Jim", Snackbar.LENGTH_LONG).show();
+        showButtonInStartMode();
     }
 }

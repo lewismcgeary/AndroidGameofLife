@@ -92,6 +92,13 @@ public class LifeGridLayout extends GridLayout {
             lifeCell.setEnabled(true);
         }
     }
+
+    public void cellsDiedGameOver(){
+        if(context instanceof MainActivity){
+            MainActivity activity = (MainActivity)context;
+            activity.gameOver();
+        }
+    }
     //can disable this as no scrolling needed
     @Override
     public boolean shouldDelayChildPressedState() {
