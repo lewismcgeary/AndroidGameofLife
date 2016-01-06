@@ -32,8 +32,13 @@ public class LifeGridLayout extends GridLayout {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 LifeCellView touchedCell = (LifeCellView)v;
-                touchedCell.makeCellViewLive();
-                return true;
+                //cells can be toggled between living or dead by user at start of game
+                if(touchedCell.getState()) {
+                    touchedCell.makeCellViewDead();
+                } else {
+                    touchedCell.makeCellViewLive();
+                }
+                return false;
             }
         };
         for (int x=0; x<getColumnCount(); x++){
