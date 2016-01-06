@@ -12,6 +12,7 @@ public class GridPresenter {
     Grid worldGrid;
     LifeGridLayout worldGridLayout;
     int moveDuration;
+    private CalculateUpdateTask calculateUpdateTask;
 
     public GridPresenter(LifeGridLayout newWorldGridLayout, int moveDuration) {
         worldGridLayout = newWorldGridLayout;
@@ -43,42 +44,56 @@ public class GridPresenter {
     }
 
     public void resetGrid(){
-        if(mHandler != null) {
-            mHandler.removeCallbacks(mRunnable);
-        }
+        calculateUpdateTask.cancel(true);
         worldGrid.killAllCells();
         worldGridLayout.killAllCells();
     }
 
-    Handler mHandler;
     public void startConstantUpdate() {
-        mHandler = new Handler();
-        mHandler.postDelayed(mRunnable, 0);
+        calculateUpdateTask = new CalculateUpdateTask();
+        calculateUpdateTask.execute();
     }
 
-    private Runnable mRunnable = new Runnable() {
+    private class CalculateUpdateTask extends AsyncTask<Void, List<GridCoordinates>, Void> {
+        Handler asyncHandler = new Handler();
+        final Runnable asyncRunnable = new Runnable() {
+            @Override
+            public void run() {
+                worldGrid.calculateNextStateOfCells();
+                worldGrid.switchCellsToNextState();
+                if(isCancelled()){
+                    asyncHandler.removeCallbacks(asyncRunnable);
+                } else {
+                    publishProgress(worldGrid.getLiveCells());
+                }
+                asyncHandler.postDelayed(asyncRunnable, moveDuration);
+            }
+        };
 
         @Override
-        public void run() {
-            updateGrid();
-            mHandler.postDelayed(mRunnable, moveDuration);
-        }
-    };
-
-    private class CalculateUpdateTask extends AsyncTask<Void, Void, List<GridCoordinates>> {
-
-        @Override
-        protected List<GridCoordinates> doInBackground(Void... params) {
-            worldGrid.calculateNextStateOfCells();
-            worldGrid.switchCellsToNextState();
-            return worldGrid.getLiveCells();
+        protected void onCancelled() {
+            super.onCancelled();
+            asyncHandler.removeCallbacks(asyncRunnable);
         }
 
         @Override
-        protected void onPostExecute(List<GridCoordinates> newListOfCells) {
-            super.onPostExecute(newListOfCells);
-            worldGridLayout.setNewLiveCells(newListOfCells);
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            asyncHandler.postDelayed(asyncRunnable, 0);
+            return null;
 
         }
+
+        @Override
+        protected void onProgressUpdate(List<GridCoordinates>... newListOfLiveCells) {
+            super.onProgressUpdate(newListOfLiveCells);
+            worldGridLayout.setNewLiveCells(newListOfLiveCells[0]);
+        }
+
     }
 }

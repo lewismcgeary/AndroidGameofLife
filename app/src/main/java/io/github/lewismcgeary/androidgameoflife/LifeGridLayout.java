@@ -22,6 +22,7 @@ public class LifeGridLayout extends GridLayout {
         super(context, attrs);
         this.context = context;
         this.attrs = attrs;
+        this.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
     }
 
 
@@ -87,8 +88,8 @@ public class LifeGridLayout extends GridLayout {
         for(int i=0; i<getChildCount(); i++) {
             lifeCell = (LifeCellView)getChildAt(i);
             //re-enable clicking of cells for next game
-            lifeCell.setEnabled(true);
             lifeCell.makeCellViewDead();
+            lifeCell.setEnabled(true);
         }
     }
     //can disable this as no scrolling needed
