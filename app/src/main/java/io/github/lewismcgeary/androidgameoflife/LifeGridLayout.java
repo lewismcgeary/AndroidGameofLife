@@ -50,6 +50,8 @@ public class LifeGridLayout extends GridLayout {
         List<GridCoordinates> userSelectedLiveCells = new ArrayList<>();
         for (int i=0; i < getChildCount(); i++) {
             lifeCell = (LifeCellView)getChildAt(i);
+            //disable clicking of cells during game
+            lifeCell.setEnabled(false);
             if(lifeCell.getState()){
                 int x = i % getColumnCount();
                 int y = i/getColumnCount();
@@ -79,6 +81,8 @@ public class LifeGridLayout extends GridLayout {
     public void killAllCells(){
         for(int i=0; i<getChildCount(); i++) {
             lifeCell = (LifeCellView)getChildAt(i);
+            //re-enable clicking of cells for next game
+            lifeCell.setEnabled(true);
             lifeCell.makeCellViewDead();
         }
     }
