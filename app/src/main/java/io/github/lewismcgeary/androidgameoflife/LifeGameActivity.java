@@ -9,7 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.FrameLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class LifeGameActivity extends AppCompatActivity {
     GridPresenter worldGridPresenter;
     LifeGridLayout worldGridLayout;
     FloatingActionButton startResetFab;
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_life_game);
         worldGridLayout = (LifeGridLayout)findViewById(R.id.life_grid_layout);
         worldGridLayout.post(new Runnable() {
             @Override
