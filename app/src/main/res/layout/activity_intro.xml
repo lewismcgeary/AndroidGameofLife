@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="io.github.lewismcgeary.androidgameoflife.IntroActivity">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/intro_card_view"
+        android:transitionName="@string/card_view_transition_name"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/introduction_text"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/intro_done_button"
+            android:transitionName="@string/fab_transition_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_done_24dp"/>
+
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

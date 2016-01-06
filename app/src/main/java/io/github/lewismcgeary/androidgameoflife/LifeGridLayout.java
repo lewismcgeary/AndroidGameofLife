@@ -94,8 +94,8 @@ public class LifeGridLayout extends GridLayout {
     }
 
     public void cellsDiedGameOver(){
-        if(context instanceof MainActivity){
-            MainActivity activity = (MainActivity)context;
+        if(context instanceof LifeGameActivity){
+            LifeGameActivity activity = (LifeGameActivity)context;
             activity.gameOver();
         }
     }
