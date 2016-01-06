@@ -38,20 +38,15 @@ public class GridPresenter {
         return worldGrid.getLiveCells();
     }
 
-    public void updateGrid(){
-        new CalculateUpdateTask().execute();
-
+    public void startConstantUpdate() {
+        calculateUpdateTask = new CalculateUpdateTask();
+        calculateUpdateTask.execute();
     }
 
     public void resetGrid(){
         calculateUpdateTask.cancel(true);
         worldGrid.killAllCells();
         worldGridLayout.killAllCells();
-    }
-
-    public void startConstantUpdate() {
-        calculateUpdateTask = new CalculateUpdateTask();
-        calculateUpdateTask.execute();
     }
 
     private class CalculateUpdateTask extends AsyncTask<Void, List<GridCoordinates>, Void> {
