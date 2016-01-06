@@ -19,7 +19,7 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Lorem Ipsum"/>
+            android:text="@string/introduction_text"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/intro_done_button"

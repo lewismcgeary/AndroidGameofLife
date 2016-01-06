@@ -5,4 +5,7 @@
 
     <string name="card_view_transition_name">transition_card_view</string>
     <string name="fab_transition_name">transition_fab</string>
+
+    <string name="introduction_text">This is an example of Conway\'s Game of Life. Start the game by
+    selecting cells which will start the game alive, the cells will then live or die following some simple rules.</string>
 </resources>
