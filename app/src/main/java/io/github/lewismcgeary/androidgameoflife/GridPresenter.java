@@ -60,13 +60,13 @@ public class GridPresenter {
         final Runnable asyncRunnable = new Runnable() {
             @Override
             public void run() {
-                worldGrid.calculateNextStateOfCells();
-                worldGrid.switchCellsToNextState();
                 if(isCancelled()){
                     asyncHandler.removeCallbacks(asyncRunnable);
                 } else {
                     publishProgress(worldGrid.getLiveCells());
                 }
+                worldGrid.calculateNextStateOfCells();
+                worldGrid.switchCellsToNextState();
                 asyncHandler.postDelayed(asyncRunnable, moveDuration);
             }
         };
