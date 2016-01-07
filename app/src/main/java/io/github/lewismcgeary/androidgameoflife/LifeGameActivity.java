@@ -4,9 +4,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 public class LifeGameActivity extends AppCompatActivity {
@@ -86,12 +88,16 @@ public class LifeGameActivity extends AppCompatActivity {
 
     public void gameOver(){
         Snackbar snack = Snackbar.make(startResetFab, R.string.game_over_snackbar_text, Snackbar.LENGTH_LONG);
+        ViewGroup group = (ViewGroup) snack.getView();
+        group.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         snack.show();
         showButtonInStartMode();
     }
 
     public void showMessageThatNoCellsWereSelected(){
         Snackbar snack = Snackbar.make(startResetFab, R.string.starting_blank_game_snackbar_text , Snackbar.LENGTH_LONG);
+        ViewGroup group = (ViewGroup) snack.getView();
+        group.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         snack.show();
         showButtonInStartMode();
     }
