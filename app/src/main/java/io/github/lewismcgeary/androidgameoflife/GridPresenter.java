@@ -57,11 +57,12 @@ public class GridPresenter {
 
     private class CalculateUpdateTask extends AsyncTask<Void, List<GridCoordinates>, Void> {
         Handler asyncHandler = new Handler();
-        final Runnable asyncRunnable = new Runnable() {
+        Runnable asyncRunnable = new Runnable() {
             @Override
             public void run() {
                 if(isCancelled()){
                     asyncHandler.removeCallbacks(asyncRunnable);
+                    asyncRunnable = null;
                 } else {
                     publishProgress(worldGrid.getLiveCells());
                 }
@@ -75,6 +76,7 @@ public class GridPresenter {
         protected void onCancelled() {
             super.onCancelled();
             asyncHandler.removeCallbacks(asyncRunnable);
+            asyncRunnable = null;
         }
 
         @Override
