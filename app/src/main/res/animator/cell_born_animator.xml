@@ -5,7 +5,7 @@
         android:duration="@integer/animation_duration"
         android:propertyName="pathData"
         android:valueType="pathType"
-        android:valueFrom="@string/dead_cell_clip_path"
-        android:valueTo="@string/live_cell_clip_path"
+        android:valueFrom="@string/dead_cell_path"
+        android:valueTo="@string/live_cell_path"
         android:interpolator="@android:interpolator/accelerate_decelerate"/>
 </set>

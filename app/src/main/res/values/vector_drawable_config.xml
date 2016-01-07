@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="short_tentacle_path">M12,0 C18,12 6,12 12,24</string>
-    <string name="diagonal_tentacle_path">M0,0 C12,6 12,18 24,24</string>
-    <!--
-    <string name="dead_cell_clip_path">M10,10 L14,10 14,14 10,14</string>
-    -->
-    <string name="dead_cell_clip_path">M12,12 L12,12 12,12 12,12</string>
+    <string name="cell_name">square cell</string>
 
-    <string name="live_cell_clip_path">M0,0 L24,0 24,24 0,24</string>
+    <string name="dead_cell_path">M12,12 L12,12 12,12 12,12</string>
+
+    <string name="live_cell_path">M0,0 L24,0 24,24 0,24</string>
 </resources>

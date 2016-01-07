@@ -57,16 +57,17 @@ public class GridPresenter {
 
     private class CalculateUpdateTask extends AsyncTask<Void, List<GridCoordinates>, Void> {
         Handler asyncHandler = new Handler();
-        final Runnable asyncRunnable = new Runnable() {
+        Runnable asyncRunnable = new Runnable() {
             @Override
             public void run() {
-                worldGrid.calculateNextStateOfCells();
-                worldGrid.switchCellsToNextState();
                 if(isCancelled()){
                     asyncHandler.removeCallbacks(asyncRunnable);
+                    asyncRunnable = null;
                 } else {
                     publishProgress(worldGrid.getLiveCells());
                 }
+                worldGrid.calculateNextStateOfCells();
+                worldGrid.switchCellsToNextState();
                 asyncHandler.postDelayed(asyncRunnable, moveDuration);
             }
         };
@@ -75,6 +76,7 @@ public class GridPresenter {
         protected void onCancelled() {
             super.onCancelled();
             asyncHandler.removeCallbacks(asyncRunnable);
+            asyncRunnable = null;
         }
 
         @Override
@@ -93,11 +95,10 @@ public class GridPresenter {
         @Override
         protected void onProgressUpdate(List<GridCoordinates>... newListOfLiveCells) {
             super.onProgressUpdate(newListOfLiveCells);
+            worldGridLayout.setNewLiveCells(newListOfLiveCells[0]);
             if(newListOfLiveCells[0].size() == 0){
-                resetGrid();
                 worldGridLayout.cellsDiedGameOver();
-            } else {
-                worldGridLayout.setNewLiveCells(newListOfLiveCells[0]);
+                resetGrid();
             }
         }
 

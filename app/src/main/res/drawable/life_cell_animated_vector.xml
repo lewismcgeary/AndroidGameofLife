@@ -3,8 +3,5 @@
     android:drawable="@drawable/life_cell_vector_dead">
     <target
         android:animation="@animator/cell_born_animator"
-        android:name="tentacle clip path"/>
-    <target
-        android:animation="@animator/rotate_90_anticlockwise"
-        android:name="whole cell"/>
+        android:name="@string/cell_name"/>
 </animated-vector>
