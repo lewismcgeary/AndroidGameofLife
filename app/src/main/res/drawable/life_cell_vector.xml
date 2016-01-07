@@ -7,7 +7,7 @@
     android:alpha="1"
     android:name="whole cell alpha">
     <path
-        android:name="square cell"
-        android:pathData="@string/live_cell_clip_path"
+        android:name="@string/cell_name"
+        android:pathData="@string/live_cell_path"
         android:fillColor="@color/colorPrimaryDark"/>
 </vector>

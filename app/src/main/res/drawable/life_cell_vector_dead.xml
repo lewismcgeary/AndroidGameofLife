@@ -5,7 +5,7 @@
     android:viewportHeight="24"
     android:viewportWidth="24">
     <path
-        android:name="square cell"
-        android:pathData="@string/dead_cell_clip_path"
+        android:name="@string/cell_name"
+        android:pathData="@string/dead_cell_path"
         android:fillColor="@color/colorPrimaryDark"/>
 </vector>

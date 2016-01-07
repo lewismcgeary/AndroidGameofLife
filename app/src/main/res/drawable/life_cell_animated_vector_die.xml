@@ -3,5 +3,5 @@
     android:drawable="@drawable/life_cell_vector">
     <target
         android:animation="@animator/fade_out"
-        android:name="square cell"/>
+        android:name="@string/cell_name"/>
 </animated-vector>

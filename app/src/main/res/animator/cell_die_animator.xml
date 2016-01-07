@@ -5,6 +5,6 @@
         android:duration="@integer/animation_duration"
         android:propertyName="pathData"
         android:valueType="pathType"
-        android:valueFrom="@string/live_cell_clip_path"
-        android:valueTo="@string/dead_cell_clip_path" />
+        android:valueFrom="@string/live_cell_path"
+        android:valueTo="@string/dead_cell_path" />
 </set>
