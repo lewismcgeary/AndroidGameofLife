@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/life_cell_vector">
-
-    <target
-        android:animation="@animator/rotate_90_anticlockwise"
-        android:name="whole cell"/>
     <target
         android:animation="@animator/fade_out"
-        android:name="whole cell alpha"/>
+        android:name="square cell"/>
 </animated-vector>

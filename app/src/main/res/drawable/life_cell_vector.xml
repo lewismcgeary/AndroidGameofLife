@@ -6,36 +6,8 @@
     android:viewportWidth="24"
     android:alpha="1"
     android:name="whole cell alpha">
-    <group
-        android:name="whole cell"
-        android:pivotX="12"
-        android:pivotY="12"
-        android:rotation="0">
-    <clip-path
-        android:name="tentacle clip path"
-        android:pathData="@string/live_cell_clip_path" />
     <path
-        android:pathData="@string/short_tentacle_path"
-        android:strokeColor="@android:color/holo_red_dark"
-        android:strokeWidth="2.0" />
-    <path
-        android:pathData="@string/diagonal_tentacle_path"
-        android:strokeColor="@android:color/holo_red_dark"
-        android:strokeWidth="2.0" />
-    <group
-        android:pivotX="12"
-        android:pivotY="12"
-        android:rotation="90">
-
-        <path
-            android:pathData="@string/short_tentacle_path"
-            android:strokeColor="@android:color/holo_red_dark"
-            android:strokeWidth="2.0" />
-        <path
-            android:pathData="@string/diagonal_tentacle_path"
-            android:strokeColor="@android:color/holo_red_dark"
-            android:strokeWidth="2.0" />
-
-    </group>
-    </group>
+        android:name="square cell"
+        android:pathData="@string/live_cell_clip_path"
+        android:fillColor="@color/colorPrimaryDark"/>
 </vector>
