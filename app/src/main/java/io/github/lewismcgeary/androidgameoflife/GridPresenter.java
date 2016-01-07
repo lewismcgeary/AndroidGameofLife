@@ -30,8 +30,14 @@ public class GridPresenter {
     }
 
     public void passLiveCellsToModelAndStartGame(){
-        worldGrid.setInitialLiveCells(worldGridLayout.getUserSetLiveCellCoordinates());
-        startConstantUpdate();
+        List<GridCoordinates> userSelectedCells = worldGridLayout.getUserSetLiveCellCoordinates();
+        if(userSelectedCells.size() != 0) {
+            worldGrid.setInitialLiveCells(userSelectedCells);
+            startConstantUpdate();
+        } else {
+            worldGridLayout.noCellsWereSelected();
+            resetGrid();
+        }
     }
 
     public List<GridCoordinates> getLiveCells(){
