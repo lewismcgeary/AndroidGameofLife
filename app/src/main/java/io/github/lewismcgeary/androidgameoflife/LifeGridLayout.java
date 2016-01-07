@@ -98,6 +98,14 @@ public class LifeGridLayout extends GridLayout {
             LifeGameActivity activity = (LifeGameActivity)context;
             activity.showMessageThatNoCellsWereSelected();
         }
+        reEnableCellClicking();
+    }
+
+    public void reEnableCellClicking(){
+        for(int i=0; i<getChildCount(); i++) {
+            lifeCell = (LifeCellView)getChildAt(i);
+            lifeCell.setEnabled(true);
+        }
     }
 
     public void cellsDiedGameOver(){
