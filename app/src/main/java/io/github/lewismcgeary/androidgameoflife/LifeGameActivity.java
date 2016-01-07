@@ -85,7 +85,14 @@ public class LifeGameActivity extends AppCompatActivity {
     }
 
     public void gameOver(){
-        Snackbar.make(startResetFab, "They're dead, Jim", Snackbar.LENGTH_LONG).show();
+        Snackbar snack = Snackbar.make(startResetFab, R.string.game_over_snackbar_text, Snackbar.LENGTH_LONG);
+        snack.show();
+        showButtonInStartMode();
+    }
+
+    public void showMessageThatNoCellsWereSelected(){
+        Snackbar snack = Snackbar.make(startResetFab, R.string.starting_blank_game_snackbar_text , Snackbar.LENGTH_LONG);
+        snack.show();
         showButtonInStartMode();
     }
 }

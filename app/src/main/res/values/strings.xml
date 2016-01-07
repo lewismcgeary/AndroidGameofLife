@@ -8,4 +8,7 @@
 
     <string name="introduction_text">This is an example of Conway\'s Game of Life. Start the game by
     selecting cells which will start the game alive, the cells will then live or die following some simple rules.</string>
+
+    <string name="starting_blank_game_snackbar_text">Select some cells first!</string>
+    <string name="game_over_snackbar_text">They\'re dead, Jim</string>
 </resources>

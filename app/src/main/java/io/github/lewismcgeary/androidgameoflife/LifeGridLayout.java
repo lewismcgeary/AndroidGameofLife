@@ -93,6 +93,13 @@ public class LifeGridLayout extends GridLayout {
         }
     }
 
+    public void noCellsWereSelected(){
+        if(context instanceof LifeGameActivity){
+            LifeGameActivity activity = (LifeGameActivity)context;
+            activity.showMessageThatNoCellsWereSelected();
+        }
+    }
+
     public void cellsDiedGameOver(){
         if(context instanceof LifeGameActivity){
             LifeGameActivity activity = (LifeGameActivity)context;
