@@ -36,7 +36,6 @@ public class GridPresenter {
             startConstantUpdate();
         } else {
             worldGridLayout.noCellsWereSelected();
-            resetGrid();
         }
     }
 
