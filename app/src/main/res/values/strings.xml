@@ -12,10 +12,10 @@
         \n1. Any live cell with fewer than two live neighbours dies.
         \n2. Any live cell with more than three live neighbours dies.
         \n3. Any live cell with two or three live neighbours survives to the next generation.
-        \n4. Any dead cell with exactly three live neighbours cells will come to life.
+        \n4. Any dead cell with exactly three live neighbours will come to life.
         \n
         \nBegin by selecting which cells will start the game alive, then press play to watch your world evolve.</string>
 
-    <string name="starting_blank_game_snackbar_text">Select some cells first!</string>
+    <string name="starting_blank_game_snackbar_text">Tap the screen to select some cells first!</string>
     <string name="game_over_snackbar_text">They\'re dead, Jim</string>
 </resources>
