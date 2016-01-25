@@ -19,6 +19,7 @@ public class LifeGridLayout extends GridLayout {
     float leftOrigin;
     float topOrigin;
     int cellPixelSize;
+    boolean bringingCellsToLife;
 
 
     public LifeGridLayout(Context context, AttributeSet attrs) {
@@ -76,7 +77,22 @@ public class LifeGridLayout extends GridLayout {
                 if (0 <= xGridPosition && xGridPosition < getColumnCount() && 0 <= yGridPosition && yGridPosition < getRowCount()) {
                     int touchedCellIndex = xGridPosition + yGridPosition * getColumnCount();
                     lifeCell = (LifeCellView) getChildAt(touchedCellIndex);
-                    lifeCell.makeCellViewLive();
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            if (lifeCell.getState()) {
+                                lifeCell.makeCellViewDead();
+                                bringingCellsToLife = false;
+                            } else {
+                                lifeCell.makeCellViewLive();
+                                bringingCellsToLife = true;
+                            }
+                        case MotionEvent.ACTION_MOVE:
+                            if (bringingCellsToLife) {
+                                lifeCell.makeCellViewLive();
+                            } else {
+                                lifeCell.makeCellViewDead();
+                            }
+                    }
                 }
                 return true;
             }
