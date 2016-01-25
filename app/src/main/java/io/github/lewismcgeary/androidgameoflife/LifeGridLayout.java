@@ -72,9 +72,12 @@ public class LifeGridLayout extends GridLayout {
                 //divide by cellPixelSize to get x and y gridlayout coordinates
                 int xGridPosition = (int) (event.getX() - leftOrigin) / cellPixelSize;
                 int yGridPosition = (int) (event.getY() - topOrigin) / cellPixelSize;
-                int touchedCellIndex = xGridPosition + yGridPosition * getColumnCount();
-                lifeCell = (LifeCellView) getChildAt(touchedCellIndex);
-                lifeCell.makeCellViewLive();
+                //check that calculated positions are within range of grid
+                if (0 <= xGridPosition && xGridPosition < getColumnCount() && 0 <= yGridPosition && yGridPosition < getRowCount()) {
+                    int touchedCellIndex = xGridPosition + yGridPosition * getColumnCount();
+                    lifeCell = (LifeCellView) getChildAt(touchedCellIndex);
+                    lifeCell.makeCellViewLive();
+                }
                 return true;
             }
         });
