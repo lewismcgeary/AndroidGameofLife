@@ -16,6 +16,9 @@ public class LifeGridLayout extends GridLayout {
     Context context;
     AttributeSet attrs;
     LifeCellView lifeCell;
+    float leftOrigin;
+    float topOrigin;
+    int cellPixelSize;
 
 
     public LifeGridLayout(Context context, AttributeSet attrs) {
@@ -45,11 +48,36 @@ public class LifeGridLayout extends GridLayout {
         for (int x=0; x<getColumnCount(); x++){
             for(int y=0; y<getRowCount(); y++){
                 lifeCell = new LifeCellView(context, attrs);
-                lifeCell.setOnTouchListener(cellTouchListener);
+                //lifeCell.setOnTouchListener(cellTouchListener);
                 this.addView(lifeCell);
             }
         }
+        //get position and size on screen of first cell
+        //based on this can calculate grid coordinates from on screen pixel coordinates
 
+        this.post(new Runnable() {
+            @Override
+            public void run() {
+                lifeCell = (LifeCellView) getChildAt(0);
+                leftOrigin = lifeCell.getX();
+                topOrigin = lifeCell.getY();
+                cellPixelSize = lifeCell.getWidth();
+            }
+        });
+        this.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //use x and y from event to calculate which cell is touched
+                //subtract left or top origin to get baseline position from origin
+                //divide by cellPixelSize to get x and y gridlayout coordinates
+                int xGridPosition = (int) (event.getX() - leftOrigin) / cellPixelSize;
+                int yGridPosition = (int) (event.getY() - topOrigin) / cellPixelSize;
+                int touchedCellIndex = xGridPosition + yGridPosition * getColumnCount();
+                lifeCell = (LifeCellView) getChildAt(touchedCellIndex);
+                lifeCell.makeCellViewLive();
+                return true;
+            }
+        });
     }
 
     public List<GridCoordinates> getUserSetLiveCellCoordinates() {
