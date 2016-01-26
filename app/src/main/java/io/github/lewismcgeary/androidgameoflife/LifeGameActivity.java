@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-public class LifeGameActivity extends AppCompatActivity {
+public class LifeGameActivity extends AppCompatActivity implements GameStateCallback {
     GridPresenter worldGridPresenter;
     LifeGridLayout worldGridLayout;
     FloatingActionButton startResetFab;
@@ -25,6 +25,7 @@ public class LifeGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_life_game);
         worldGridLayout = (LifeGridLayout)findViewById(R.id.life_grid_layout);
+        worldGridLayout.setCallback(this);
         worldGridLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -86,6 +87,17 @@ public class LifeGameActivity extends AppCompatActivity {
         startResetFab.setImageDrawable(resetIcon);
     }
 
+    @Override
+    public void cellDrawingInProgress() {
+        startResetFab.hide();
+    }
+
+    @Override
+    public void cellDrawingFinished() {
+        startResetFab.show();
+    }
+
+    @Override
     public void gameOver(){
         Snackbar snack = Snackbar.make(startResetFab, R.string.game_over_snackbar_text, Snackbar.LENGTH_LONG);
         ViewGroup group = (ViewGroup) snack.getView();
@@ -94,7 +106,8 @@ public class LifeGameActivity extends AppCompatActivity {
         showButtonInStartMode();
     }
 
-    public void showMessageThatNoCellsWereSelected(){
+    @Override
+    public void noCellsWereSelected() {
         Snackbar snack = Snackbar.make(startResetFab, R.string.starting_blank_game_snackbar_text , Snackbar.LENGTH_LONG);
         ViewGroup group = (ViewGroup) snack.getView();
         group.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
