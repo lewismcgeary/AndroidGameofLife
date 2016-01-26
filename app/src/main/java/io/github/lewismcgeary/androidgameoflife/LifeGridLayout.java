@@ -87,6 +87,11 @@ public class LifeGridLayout extends GridLayout {
                             gameStateCallback.cellDrawingFinished();
                             return false;
                     }
+                } else {
+                    if(event.getAction() == MotionEvent.ACTION_UP){
+                        gameStateCallback.cellDrawingFinished();
+                        return false;
+                    }
                 }
                 return true;
             }
