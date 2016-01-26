@@ -65,6 +65,8 @@ public class LifeGridLayout extends GridLayout {
 
                     int touchedCellIndex = xGridPosition + yGridPosition * getColumnCount();
                     lifeCell = (LifeCellView) getChildAt(touchedCellIndex);
+                    //each continuous touch movement will be either giving life to cells or killing them
+                    //the first cell touched determines which action is being performed
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             gameStateCallback.cellDrawingInProgress();
