@@ -1,5 +1,6 @@
 package io.github.lewismcgeary.androidgameoflife;
 
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -23,6 +25,7 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setFixedScreenOrientation();
         setContentView(R.layout.activity_life_game);
         worldGridLayout = (LifeGridLayout)findViewById(R.id.life_grid_layout);
         worldGridLayout.setCallback(this);
@@ -50,6 +53,28 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
             }
         });
     }
+
+    private void setFixedScreenOrientation(){
+        //game can be started in any orientation but once GameActivity is reached it will stay in
+        //the orientation it starts in
+        int orientation = getWindowManager().getDefaultDisplay().getRotation();
+
+        switch(orientation) {
+            case Surface.ROTATION_180:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+                break;
+            case Surface.ROTATION_270:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                break;
+            case  Surface.ROTATION_0:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                break;
+            case Surface.ROTATION_90:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                break;
+        }
+    }
+
     private void setUpGrid() {
         int densityOfScreen = DisplayMetrics.DENSITY_DEFAULT;
         int cellSize = (int) getResources().getDimension(R.dimen.cell_size);
