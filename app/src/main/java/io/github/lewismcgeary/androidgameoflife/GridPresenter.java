@@ -34,6 +34,7 @@ public class GridPresenter {
         if(userSelectedCells.size() != 0) {
             worldGrid.setInitialLiveCells(userSelectedCells);
             startConstantUpdate();
+            worldGridLayout.setEnabled(false);
         } else {
             worldGridLayout.noCellsWereSelected();
         }
@@ -52,6 +53,7 @@ public class GridPresenter {
         calculateUpdateTask.cancel(true);
         worldGrid.killAllCells();
         worldGridLayout.killAllCells();
+        worldGridLayout.setEnabled(true);
     }
 
     private class CalculateUpdateTask extends AsyncTask<Void, List<GridCoordinates>, Void> {

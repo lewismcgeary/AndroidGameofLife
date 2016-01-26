@@ -16,6 +16,10 @@ public class LifeGridLayout extends GridLayout {
     Context context;
     AttributeSet attrs;
     LifeCellView lifeCell;
+    float leftOrigin;
+    float topOrigin;
+    int cellPixelSize;
+    boolean bringingCellsToLife;
 
 
     public LifeGridLayout(Context context, AttributeSet attrs) {
@@ -29,40 +33,65 @@ public class LifeGridLayout extends GridLayout {
 
 
     public void initialiseLifeGridLayout(){
-        OnTouchListener cellTouchListener = new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                LifeCellView touchedCell = (LifeCellView)v;
-                //cells can be toggled between living or dead by user at start of game
-                if(touchedCell.getState()) {
-                    touchedCell.makeCellViewDead();
-                } else {
-                    touchedCell.makeCellViewLive();
-                }
-                return false;
-            }
-        };
         for (int x=0; x<getColumnCount(); x++){
             for(int y=0; y<getRowCount(); y++){
                 lifeCell = new LifeCellView(context, attrs);
-                lifeCell.setOnTouchListener(cellTouchListener);
                 this.addView(lifeCell);
             }
         }
 
+        this.post(new Runnable() {
+            @Override
+            public void run() {
+                //after layout is drawn, use first cell as an anchor to work out any coordinates
+                lifeCell = (LifeCellView) getChildAt(0);
+                leftOrigin = lifeCell.getX();
+                topOrigin = lifeCell.getY();
+                cellPixelSize = lifeCell.getWidth();
+            }
+        });
+        this.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //calculate the grid position based on finger location on the screen
+                int xGridPosition = (int) (event.getX() - leftOrigin) / cellPixelSize;
+                int yGridPosition = (int) (event.getY() - topOrigin) / cellPixelSize;
+                //check that calculated positions are within range of grid
+                if (0 <= xGridPosition && xGridPosition < getColumnCount()
+                        && 0 <= yGridPosition && yGridPosition < getRowCount()) {
+
+                    int touchedCellIndex = xGridPosition + yGridPosition * getColumnCount();
+                    lifeCell = (LifeCellView) getChildAt(touchedCellIndex);
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            if (lifeCell.getState()) {
+                                lifeCell.makeCellViewDead();
+                                bringingCellsToLife = false;
+                            } else {
+                                lifeCell.makeCellViewLive();
+                                bringingCellsToLife = true;
+                            }
+                        case MotionEvent.ACTION_MOVE:
+                            if (bringingCellsToLife) {
+                                lifeCell.makeCellViewLive();
+                            } else {
+                                lifeCell.makeCellViewDead();
+                            }
+                    }
+                }
+                return true;
+            }
+        });
     }
 
     public List<GridCoordinates> getUserSetLiveCellCoordinates() {
         List<GridCoordinates> userSelectedLiveCells = new ArrayList<>();
         for (int i=0; i < getChildCount(); i++) {
             lifeCell = (LifeCellView)getChildAt(i);
-            //disable clicking of cells during game
-            lifeCell.setEnabled(false);
             if(lifeCell.getState()){
                 int x = i % getColumnCount();
                 int y = i/getColumnCount();
                 userSelectedLiveCells.add(new GridCoordinates(x, y));
-
             }
         }
         return userSelectedLiveCells;
@@ -87,9 +116,7 @@ public class LifeGridLayout extends GridLayout {
     public void killAllCells(){
         for(int i=0; i<getChildCount(); i++) {
             lifeCell = (LifeCellView)getChildAt(i);
-            //re-enable clicking of cells for next game
             lifeCell.makeCellViewDead();
-            lifeCell.setEnabled(true);
         }
     }
 
@@ -97,14 +124,6 @@ public class LifeGridLayout extends GridLayout {
         if(context instanceof LifeGameActivity){
             LifeGameActivity activity = (LifeGameActivity)context;
             activity.showMessageThatNoCellsWereSelected();
-        }
-        reEnableCellClicking();
-    }
-
-    public void reEnableCellClicking(){
-        for(int i=0; i<getChildCount(); i++) {
-            lifeCell = (LifeCellView)getChildAt(i);
-            lifeCell.setEnabled(true);
         }
     }
 
