@@ -20,6 +20,7 @@ public class LifeGridLayout extends GridLayout {
     float topOrigin;
     int cellPixelSize;
     boolean bringingCellsToLife;
+    private GameStateCallback gameStateCallback;
 
 
     public LifeGridLayout(Context context, AttributeSet attrs) {
@@ -29,7 +30,9 @@ public class LifeGridLayout extends GridLayout {
         this.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
     }
 
-
+    public void setCallback(GameStateCallback callback){
+        gameStateCallback = callback;
+    }
 
 
     public void initialiseLifeGridLayout(){
@@ -62,8 +65,11 @@ public class LifeGridLayout extends GridLayout {
 
                     int touchedCellIndex = xGridPosition + yGridPosition * getColumnCount();
                     lifeCell = (LifeCellView) getChildAt(touchedCellIndex);
+                    //each continuous touch movement will be either giving life to cells or killing them
+                    //the first cell touched determines which action is being performed
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
+                            gameStateCallback.cellDrawingInProgress();
                             if (lifeCell.getState()) {
                                 lifeCell.makeCellViewDead();
                                 bringingCellsToLife = false;
@@ -71,12 +77,22 @@ public class LifeGridLayout extends GridLayout {
                                 lifeCell.makeCellViewLive();
                                 bringingCellsToLife = true;
                             }
+                            return true;
                         case MotionEvent.ACTION_MOVE:
                             if (bringingCellsToLife) {
                                 lifeCell.makeCellViewLive();
                             } else {
                                 lifeCell.makeCellViewDead();
                             }
+                            return true;
+                        case MotionEvent.ACTION_UP:
+                            gameStateCallback.cellDrawingFinished();
+                            return false;
+                    }
+                } else {
+                    if(event.getAction() == MotionEvent.ACTION_UP){
+                        gameStateCallback.cellDrawingFinished();
+                        return false;
                     }
                 }
                 return true;
@@ -121,21 +137,16 @@ public class LifeGridLayout extends GridLayout {
     }
 
     public void noCellsWereSelected(){
-        if(context instanceof LifeGameActivity){
-            LifeGameActivity activity = (LifeGameActivity)context;
-            activity.showMessageThatNoCellsWereSelected();
-        }
+        gameStateCallback.noCellsWereSelected();
     }
 
     public void cellsDiedGameOver(){
-        if(context instanceof LifeGameActivity){
-            LifeGameActivity activity = (LifeGameActivity)context;
-            activity.gameOver();
-        }
+        gameStateCallback.gameOver();
     }
     //can disable this as no scrolling needed
     @Override
     public boolean shouldDelayChildPressedState() {
         return false;
     }
+
 }
