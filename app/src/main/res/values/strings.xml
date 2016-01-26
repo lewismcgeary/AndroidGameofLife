@@ -16,6 +16,6 @@
         \n
         \nBegin by selecting which cells will start the game alive, then press play to watch your world evolve.</string>
 
-    <string name="starting_blank_game_snackbar_text">Tap the screen to select some cells first!</string>
+    <string name="starting_blank_game_snackbar_text">Touch the screen to select some cells first!</string>
     <string name="game_over_snackbar_text">They\'re dead, Jim</string>
 </resources>
