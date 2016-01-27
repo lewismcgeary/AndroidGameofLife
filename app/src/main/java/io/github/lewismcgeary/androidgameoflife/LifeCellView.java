@@ -2,6 +2,7 @@ package io.github.lewismcgeary.androidgameoflife;
 
 import android.content.Context;
 import android.graphics.drawable.AnimatedVectorDrawable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
@@ -24,17 +25,17 @@ public class LifeCellView extends ImageView {
 
     public LifeCellView(Context context) {
         super(context);
-        setImageResource(R.drawable.life_cell_animated_vector);
-        animatedCellDrawableBorn = (AnimatedVectorDrawable) getDrawable();
-        animatedCellDrawableDie = (AnimatedVectorDrawable) getResources().getDrawable(R.drawable.life_cell_animated_vector_die);
+        setImageResource(R.drawable.life_cell_vector_dead);
+        animatedCellDrawableBorn = (AnimatedVectorDrawable) ContextCompat.getDrawable(context, R.drawable.life_cell_animated_vector);
+        animatedCellDrawableDie = (AnimatedVectorDrawable) ContextCompat.getDrawable(context, R.drawable.life_cell_animated_vector_die);
 
     }
 
     public LifeCellView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setImageResource(R.drawable.life_cell_animated_vector);
-        animatedCellDrawableBorn = (AnimatedVectorDrawable) getDrawable();
-        animatedCellDrawableDie = (AnimatedVectorDrawable) getResources().getDrawable(R.drawable.life_cell_animated_vector_die);
+        setImageResource(R.drawable.life_cell_vector_dead);
+        animatedCellDrawableBorn = (AnimatedVectorDrawable) ContextCompat.getDrawable(context, R.drawable.life_cell_animated_vector);
+        animatedCellDrawableDie = (AnimatedVectorDrawable) ContextCompat.getDrawable(context, R.drawable.life_cell_animated_vector_die);
 
     }
 
