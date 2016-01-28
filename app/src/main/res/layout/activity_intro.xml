@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="io.github.lewismcgeary.androidgameoflife.IntroActivity">
 
     <android.support.v7.widget.CardView
@@ -14,7 +11,9 @@
         android:transitionName="@string/card_view_transition_name"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:cardElevation="@dimen/card_elevation">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -35,8 +34,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/intro_text_view"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_done_24dp"/>
+            android:src="@drawable/ic_done_24dp"
+            app:elevation="@dimen/floating_action_button_elevation"/>
     </RelativeLayout>
     </android.support.v7.widget.CardView>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_bar_height"
+        android:background="?attr/colorPrimary"
+        app:title="@string/app_name"
+        android:elevation="@dimen/tool_bar_elevation"/>
 
 </FrameLayout>
