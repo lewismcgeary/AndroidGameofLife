@@ -70,7 +70,7 @@ public class LifeGridLayout extends GridLayout {
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             gameStateCallback.cellDrawingInProgress();
-                            if (lifeCell.getState()) {
+                            if (lifeCell.isCellAlive()) {
                                 lifeCell.makeCellViewDead();
                                 bringingCellsToLife = false;
                             } else {
@@ -104,7 +104,7 @@ public class LifeGridLayout extends GridLayout {
         List<GridCoordinates> userSelectedLiveCells = new ArrayList<>();
         for (int i=0; i < getChildCount(); i++) {
             lifeCell = (LifeCellView)getChildAt(i);
-            if(lifeCell.getState()){
+            if(lifeCell.isCellAlive()){
                 int x = i % getColumnCount();
                 int y = i/getColumnCount();
                 userSelectedLiveCells.add(new GridCoordinates(x, y));
