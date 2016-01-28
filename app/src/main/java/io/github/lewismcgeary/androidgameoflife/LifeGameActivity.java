@@ -112,14 +112,37 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
         startResetFab.setImageDrawable(resetIcon);
     }
 
+    boolean fabShouldBeShown;
+    //this listener deals with occasions where button remains in the wrong shown/hidden state
+    //which happens if show or hide is called while it is still animating
+    FloatingActionButton.OnVisibilityChangedListener fabVisibilityListener = new FloatingActionButton.OnVisibilityChangedListener() {
+        @Override
+        public void onShown(FloatingActionButton fab) {
+            super.onShown(fab);
+            if(!fabShouldBeShown){
+                fab.hide();
+            }
+        }
+
+        @Override
+        public void onHidden(FloatingActionButton fab) {
+            super.onHidden(fab);
+            if(fabShouldBeShown){
+                fab.show();
+            }
+        }
+    };
+
     @Override
     public void cellDrawingInProgress() {
-        startResetFab.hide();
+        fabShouldBeShown = false;
+        startResetFab.hide(fabVisibilityListener);
     }
 
     @Override
     public void cellDrawingFinished() {
-        startResetFab.show();
+        fabShouldBeShown = true;
+        startResetFab.show(fabVisibilityListener);
     }
 
     @Override
