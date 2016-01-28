@@ -1,6 +1,7 @@
 package io.github.lewismcgeary.androidgameoflife;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +22,7 @@ public class LifeGridLayout extends GridLayout {
     int cellPixelSize;
     boolean bringingCellsToLife;
     private GameStateCallback gameStateCallback;
+    int delayBeforeFabDisappears = getResources().getInteger(R.integer.delay_before_fab_disappears);
 
 
     public LifeGridLayout(Context context, AttributeSet attrs) {
@@ -54,6 +56,8 @@ public class LifeGridLayout extends GridLayout {
             }
         });
         this.setOnTouchListener(new OnTouchListener() {
+            long touchStartTime;
+            long touchEventCurrentTime;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 //calculate the grid position based on finger location on the screen
@@ -69,7 +73,7 @@ public class LifeGridLayout extends GridLayout {
                     //the first cell touched determines which action is being performed
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
-                            gameStateCallback.cellDrawingInProgress();
+                            touchStartTime = SystemClock.elapsedRealtime();
                             if (lifeCell.isCellAlive()) {
                                 lifeCell.makeCellViewDead();
                                 bringingCellsToLife = false;
@@ -83,6 +87,12 @@ public class LifeGridLayout extends GridLayout {
                                 lifeCell.makeCellViewLive();
                             } else {
                                 lifeCell.makeCellViewDead();
+                            }
+                            touchEventCurrentTime = SystemClock.elapsedRealtime();
+                            //ensure series of short touch events don't cause button to repeatedly
+                            //disappear and reappear, only sustained touch events trigger this
+                            if(touchEventCurrentTime - touchStartTime > delayBeforeFabDisappears){
+                                gameStateCallback.cellDrawingInProgress();
                             }
                             return true;
                         case MotionEvent.ACTION_UP:
