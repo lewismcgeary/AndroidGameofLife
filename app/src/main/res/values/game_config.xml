@@ -2,5 +2,6 @@
 <resources>
     <integer name="move_duration">300</integer>
     <integer name="animation_duration">300</integer>
+    <integer name="delay_before_fab_disappears">500</integer>
     <dimen name="cell_size">24dp</dimen>
 </resources>
