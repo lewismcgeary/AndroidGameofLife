@@ -96,7 +96,9 @@ public class GridPresenter {
         @Override
         protected void onProgressUpdate(List<GridCoordinates>... newListOfLiveCells) {
             super.onProgressUpdate(newListOfLiveCells);
-            worldGridLayout.setNewLiveCells(newListOfLiveCells[0]);
+            if(!isCancelled()) {
+                worldGridLayout.setNewLiveCells(newListOfLiveCells[0]);
+            }
             if(newListOfLiveCells[0].size() == 0){
                 worldGridLayout.cellsDiedGameOver();
                 resetGrid();
