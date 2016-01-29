@@ -6,7 +6,17 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     tools:context=".LifeGameActivity">
-
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:title="@string/app_name"
+            android:elevation="@dimen/tool_bar_elevation" />
+    </android.support.design.widget.AppBarLayout>
     <android.support.v7.widget.CardView
         android:transitionName="@string/card_view_transition_name"
         android:layout_width="match_parent"
@@ -14,8 +24,9 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/tool_bar_height"
-        app:cardElevation="@dimen/card_elevation">
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:cardElevation="@dimen/card_elevation"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <io.github.lewismcgeary.androidgameoflife.LifeGridLayout
             android:id="@+id/life_grid_layout"
@@ -35,11 +46,4 @@
         android:tag="@string/start_button_text"
         app:elevation="@dimen/floating_action_button_elevation" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        app:title="@string/app_name"
-        android:elevation="@dimen/tool_bar_elevation" />
 </android.support.design.widget.CoordinatorLayout>
