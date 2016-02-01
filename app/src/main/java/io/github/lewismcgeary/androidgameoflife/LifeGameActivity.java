@@ -21,6 +21,7 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
     String resetButtonText;
     Drawable playIcon;
     Drawable resetIcon;
+    Snackbar snack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,12 +143,19 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
     @Override
     public void cellDrawingFinished() {
         fabShouldBeShown = true;
+        //Fab can be stuck in wrong position when snackbar appears and disappears. this check ensures
+        //fab is back in the correct location
+        if(snack != null) {
+            if(!snack.isShown()) {
+                startResetFab.setTranslationY(0.0f);
+            }
+        }
         startResetFab.show(fabVisibilityListener);
     }
 
     @Override
     public void gameOver(){
-        Snackbar snack = Snackbar.make(startResetFab, R.string.game_over_snackbar_text, Snackbar.LENGTH_LONG);
+        snack = Snackbar.make(startResetFab, R.string.game_over_snackbar_text, Snackbar.LENGTH_LONG);
         ViewGroup group = (ViewGroup) snack.getView();
         group.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         snack.show();
@@ -156,7 +164,7 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
 
     @Override
     public void noCellsWereSelected() {
-        Snackbar snack = Snackbar.make(startResetFab, R.string.starting_blank_game_snackbar_text , Snackbar.LENGTH_LONG);
+        snack = Snackbar.make(startResetFab, R.string.starting_blank_game_snackbar_text , Snackbar.LENGTH_LONG);
         ViewGroup group = (ViewGroup) snack.getView();
         group.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         snack.show();
