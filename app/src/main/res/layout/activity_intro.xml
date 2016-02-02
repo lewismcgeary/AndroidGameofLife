@@ -19,15 +19,19 @@
             android:id="@+id/feature_image"
             android:src="@drawable/plasmacytoma_feature_graphic"
             android:scaleType="centerCrop" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true">
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
                 android:background="@android:color/transparent"
                 android:elevation="@dimen/tool_bar_elevation"
                 app:title="@string/app_name"
                 app:titleTextColor="@android:color/white"/>
+            </FrameLayout>
         </android.support.design.widget.CoordinatorLayout>
 
     </android.support.design.widget.AppBarLayout>
