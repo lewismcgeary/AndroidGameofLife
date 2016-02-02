@@ -80,6 +80,8 @@
     <ImageView
         android:layout_width="78dp"
         android:layout_height="78dp"
+        android:id="@+id/app_logo"
+        android:transitionName="@string/logo_transition_name"
         app:layout_anchor="@id/feature_image"
         app:layout_anchorGravity="bottom|center_horizontal"
         android:elevation="@dimen/tool_bar_elevation"

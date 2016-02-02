@@ -12,6 +12,7 @@ import android.support.v7.widget.CardView;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
+import android.widget.ImageView;
 
 public class IntroActivity extends AppCompatActivity {
     FloatingActionButton introDoneButton;
@@ -41,11 +42,13 @@ public class IntroActivity extends AppCompatActivity {
 
     private void startTransition(){
         CardView introCardView = (CardView)findViewById(R.id.intro_card_view);
+        ImageView logo = (ImageView)findViewById(R.id.app_logo);
         Intent intent = new Intent(this, LifeGameActivity.class);
         Pair<View, String> pair1 = Pair.create((View)introCardView, getString(R.string.card_view_transition_name));
         Pair<View, String> pair2 = Pair.create((View)introDoneButton, getString(R.string.fab_transition_name));
+        Pair<View, String> pair3 = Pair.create((View)logo, getString(R.string.logo_transition_name));
         ActivityOptionsCompat options =
-                ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1, pair2);
+                ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1, pair2, pair3);
         ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
