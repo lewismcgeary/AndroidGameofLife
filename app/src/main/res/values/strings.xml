@@ -15,4 +15,5 @@
     <string name="starting_blank_game_snackbar_text">Touch the screen to select some cells first!</string>
     <string name="game_over_snackbar_text">They\'re dead, Jim</string>
     <string name="logo_transition_name">transition_logo</string>
+    <string name="lets_play_button_text">Let\'s Play</string>
 </resources>
