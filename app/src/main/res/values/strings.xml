@@ -7,14 +7,10 @@
     <string name="fab_transition_name">transition_fab</string>
 
     <string name="introduction_text">This is an example of Conway\'s Game of Life.
-        \nLife follows some simple rules:
         \n
-        \n1. Any live cell with fewer than two live neighbours dies.
-        \n2. Any live cell with more than three live neighbours dies.
-        \n3. Any live cell with two or three live neighbours survives to the next generation.
-        \n4. Any dead cell with exactly three live neighbours will come to life.
+        \nBegin by selecting which cells will start the game alive, then press play to watch your world evolve.
         \n
-        \nBegin by selecting which cells will start the game alive, then press play to watch your world evolve.</string>
+    </string>
 
     <string name="starting_blank_game_snackbar_text">Touch the screen to select some cells first!</string>
     <string name="game_over_snackbar_text">They\'re dead, Jim</string>
