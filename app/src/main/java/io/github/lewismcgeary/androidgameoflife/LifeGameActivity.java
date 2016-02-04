@@ -2,9 +2,12 @@ package io.github.lewismcgeary.androidgameoflife;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -13,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-public class LifeGameActivity extends AppCompatActivity implements GameStateCallback {
+public class LifeGameActivity extends AppCompatActivity implements LifeGridFragment.OnFragmentInteractionListener {
     GridPresenter worldGridPresenter;
     LifeGridLayout worldGridLayout;
     FloatingActionButton startResetFab;
@@ -22,20 +25,27 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
     Drawable playIcon;
     Drawable resetIcon;
     Snackbar snack;
+    LifeGridFragment lifeGridFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setFixedScreenOrientation();
         setContentView(R.layout.activity_life_game);
-        worldGridLayout = (LifeGridLayout)findViewById(R.id.life_grid_layout);
+        /** worldGridLayout = (LifeGridLayout)findViewById(R.id.life_grid_layout);
         worldGridLayout.setCallback(this);
         worldGridLayout.post(new Runnable() {
             @Override
             public void run() {
                 setUpGrid();
             }
-        });
+        }); */
+        FrameLayout container = (FrameLayout)findViewById(R.id.container);
+        lifeGridFragment = LifeGridFragment.newInstance(null, null);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, lifeGridFragment);
+        fragmentTransaction.commit();
         startResetFab = (FloatingActionButton)findViewById(R.id.start_reset_fab);
         startButtonText = getString(R.string.start_button_text);
         resetButtonText = getString(R.string.reset_button_text);
@@ -46,10 +56,10 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
             public void onClick(View v) {
                 if (startResetFab.getTag().equals(startButtonText)) {
                     showButtonInResetMode();
-                    worldGridPresenter.passLiveCellsToModelAndStartGame();
+                    lifeGridFragment.worldGridPresenter.passLiveCellsToModelAndStartGame();
                 } else {
                     showButtonInStartMode();
-                    worldGridPresenter.resetGrid();
+                    lifeGridFragment.worldGridPresenter.resetGrid();
                 }
             }
         });
@@ -169,5 +179,10 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
         group.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         snack.show();
         showButtonInStartMode();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

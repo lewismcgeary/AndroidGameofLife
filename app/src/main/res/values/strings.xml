@@ -16,4 +16,7 @@
     <string name="game_over_snackbar_text">They\'re dead, Jim</string>
     <string name="logo_transition_name">transition_logo</string>
     <string name="lets_play_button_text">Let\'s Play</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
