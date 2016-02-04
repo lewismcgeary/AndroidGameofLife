@@ -2,25 +2,31 @@ package io.github.lewismcgeary.androidgameoflife;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.Surface;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
-public class IntroActivity extends AppCompatActivity {
+public class IntroActivity extends AppCompatActivity implements IntroFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
-        Button letsPlayButton = (Button)findViewById(R.id.lets_play_button);
+        IntroFragment fragment = IntroFragment.newInstance(null, null);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
+        /** Button letsPlayButton = (Button)findViewById(R.id.lets_play_button);
         final AppBarLayout appBarLayout = (AppBarLayout)findViewById(R.id.app_bar_layout);
         letsPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +35,7 @@ public class IntroActivity extends AppCompatActivity {
                 startTransition();
                 //appBarLayout.setExpanded(false, true);
             }
-        });
+        });*/
     }
 
     @Override
@@ -70,5 +76,16 @@ public class IntroActivity extends AppCompatActivity {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 break;
         }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void letsPlay() {
+        setFixedScreenOrientation();
+        startTransition();
     }
 }
