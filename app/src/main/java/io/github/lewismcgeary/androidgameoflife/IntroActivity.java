@@ -25,9 +25,9 @@ public class IntroActivity extends AppCompatActivity {
         letsPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setFixedScreenOrientation();
-                //startTransition();
-                appBarLayout.setExpanded(false, true);
+                setFixedScreenOrientation();
+                startTransition();
+                //appBarLayout.setExpanded(false, true);
             }
         });
     }
