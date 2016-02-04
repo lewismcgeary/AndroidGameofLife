@@ -1,21 +1,19 @@
 package io.github.lewismcgeary.androidgameoflife;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.Surface;
-import android.view.View;
 import android.widget.ImageView;
 
-public class IntroActivity extends AppCompatActivity implements IntroFragment.OnFragmentInteractionListener {
+public class IntroActivity extends AppCompatActivity implements IntroFragment.OnFragmentInteractionListener, LifeGridFragment.OnFragmentInteractionListener {
+
+    AppBarLayout appBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +24,7 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
+        appBarLayout = (AppBarLayout)findViewById(R.id.app_bar_layout);
         /** Button letsPlayButton = (Button)findViewById(R.id.lets_play_button);
         final AppBarLayout appBarLayout = (AppBarLayout)findViewById(R.id.app_bar_layout);
         letsPlayButton.setOnClickListener(new View.OnClickListener() {
@@ -49,12 +48,18 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
     private void startTransition(){
         CardView introCardView = (CardView)findViewById(R.id.intro_card_view);
         ImageView logo = (ImageView)findViewById(R.id.app_logo);
-        Intent intent = new Intent(this, LifeGameActivity.class);
+        /** Intent intent = new Intent(this, LifeGameActivity.class);
         Pair<View, String> pair1 = Pair.create((View)introCardView, getString(R.string.card_view_transition_name));
         Pair<View, String> pair3 = Pair.create((View)logo, getString(R.string.logo_transition_name));
         ActivityOptionsCompat options =
                 ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1, pair3);
-        ActivityCompat.startActivity(this, intent, options.toBundle());
+        ActivityCompat.startActivity(this, intent, options.toBundle());*/
+        appBarLayout.setExpanded(false, true);
+        LifeGridFragment lifeGridFragment = LifeGridFragment.newInstance(null, null);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, lifeGridFragment);
+        fragmentTransaction.commit();
     }
 
     private void setFixedScreenOrientation(){
@@ -80,6 +85,26 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void gameOver() {
+
+    }
+
+    @Override
+    public void noCellsWereSelected() {
+
+    }
+
+    @Override
+    public void cellDrawingInProgress() {
+
+    }
+
+    @Override
+    public void cellDrawingFinished() {
 
     }
 
