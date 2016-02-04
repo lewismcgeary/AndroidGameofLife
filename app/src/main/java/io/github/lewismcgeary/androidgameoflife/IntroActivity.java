@@ -59,7 +59,6 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
     protected void onResume() {
         //allows screen to rotate again. Screen orientation is fixed while transitioning between
         //activities
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         super.onResume();
     }
 
@@ -69,6 +68,7 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
         showButtonInStartMode();
         startResetFab.hide();
         appBarLayout.setExpanded(true, true);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 
     }
 
