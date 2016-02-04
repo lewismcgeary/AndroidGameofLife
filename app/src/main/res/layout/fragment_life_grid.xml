@@ -9,9 +9,8 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        app:cardElevation="@dimen/card_elevation"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_marginTop="72dp"
+        app:cardElevation="@dimen/card_elevation">
 
         <io.github.lewismcgeary.androidgameoflife.LifeGridLayout
             android:id="@+id/life_grid_layout"

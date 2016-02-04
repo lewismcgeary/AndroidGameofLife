@@ -8,6 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.transition.ChangeBounds;
+import android.transition.ChangeTransform;
+import android.transition.TransitionSet;
 import android.view.Surface;
 import android.widget.ImageView;
 
@@ -45,6 +48,12 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
         super.onResume();
     }
 
+    @Override
+    public void onBackPressed() {
+        appBarLayout.setExpanded(true, true);
+        super.onBackPressed();
+    }
+
     private void startTransition(){
         CardView introCardView = (CardView)findViewById(R.id.intro_card_view);
         ImageView logo = (ImageView)findViewById(R.id.app_logo);
@@ -54,12 +63,20 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
         ActivityOptionsCompat options =
                 ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1, pair3);
         ActivityCompat.startActivity(this, intent, options.toBundle());*/
-        appBarLayout.setExpanded(false, true);
+
+        TransitionSet gridTransition = new TransitionSet();
+        gridTransition.setDuration(600);
+        gridTransition.addTransition(new ChangeBounds());
+        gridTransition.addTransition((new ChangeTransform()));
         LifeGridFragment lifeGridFragment = LifeGridFragment.newInstance(null, null);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        lifeGridFragment.setSharedElementEnterTransition(gridTransition);
+        fragmentTransaction.addSharedElement(findViewById(R.id.intro_card_view), getString(R.string.card_view_transition_name));
         fragmentTransaction.replace(R.id.container, lifeGridFragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+        appBarLayout.setExpanded(false, true);
     }
 
     private void setFixedScreenOrientation(){

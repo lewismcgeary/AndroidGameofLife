@@ -43,8 +43,7 @@
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/container"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    android:id="@+id/container" />
     <ImageView
         android:layout_width="96dp"
         android:layout_height="96dp"
