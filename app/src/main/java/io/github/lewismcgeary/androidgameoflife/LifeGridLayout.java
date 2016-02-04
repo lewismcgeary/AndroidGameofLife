@@ -46,14 +46,23 @@ public class LifeGridLayout extends GridLayout {
             }
         }
         lifeCell = (LifeCellView) getChildAt(0);
-        lifeCell.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        final ViewTreeObserver.OnGlobalLayoutListener listener = new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 leftOrigin = lifeCell.getX();
                 topOrigin = lifeCell.getY();
                 cellPixelSize = lifeCell.getWidth();
             }
-        });
+        };
+        lifeCell.getViewTreeObserver().addOnGlobalLayoutListener(listener);
+        /**lifeCell.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                leftOrigin = lifeCell.getX();
+                topOrigin = lifeCell.getY();
+                cellPixelSize = lifeCell.getWidth();
+            }
+        });*/
         /**lifeCell.post(new Runnable() {
             @Override
             public void run() {
@@ -82,6 +91,7 @@ public class LifeGridLayout extends GridLayout {
                     //the first cell touched determines which action is being performed
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
+                            lifeCell.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
                             touchStartTime = SystemClock.elapsedRealtime();
                             if (lifeCell.isCellAlive()) {
                                 lifeCell.makeCellViewDead();
