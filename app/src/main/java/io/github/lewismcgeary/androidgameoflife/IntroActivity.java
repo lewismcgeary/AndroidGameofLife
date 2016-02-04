@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -42,6 +43,7 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
         appBarLayout = (AppBarLayout)findViewById(R.id.app_bar_layout);
+        setAppBarDragging(false);
         initialiseButton();
         /** Button letsPlayButton = (Button)findViewById(R.id.lets_play_button);
         final AppBarLayout appBarLayout = (AppBarLayout)findViewById(R.id.app_bar_layout);
@@ -70,6 +72,19 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
         appBarLayout.setExpanded(true, true);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 
+    }
+
+    private void setAppBarDragging(final boolean newValue) {
+        CoordinatorLayout.LayoutParams params =
+                (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+        AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
+        behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
+            @Override
+            public boolean canDrag(AppBarLayout appBarLayout) {
+                return newValue;
+            }
+        });
+        params.setBehavior(behavior);
     }
 
     private void initialiseButton(){
