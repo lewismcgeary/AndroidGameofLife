@@ -3,6 +3,7 @@ package io.github.lewismcgeary.androidgameoflife;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -20,11 +21,13 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
         Button letsPlayButton = (Button)findViewById(R.id.lets_play_button);
+        final AppBarLayout appBarLayout = (AppBarLayout)findViewById(R.id.app_bar_layout);
         letsPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFixedScreenOrientation();
-                startTransition();
+                //setFixedScreenOrientation();
+                //startTransition();
+                appBarLayout.setExpanded(false, true);
             }
         });
     }
