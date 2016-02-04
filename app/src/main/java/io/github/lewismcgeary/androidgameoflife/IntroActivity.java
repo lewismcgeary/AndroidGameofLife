@@ -65,9 +65,11 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
+        showButtonInStartMode();
         startResetFab.hide();
         appBarLayout.setExpanded(true, true);
-        super.onBackPressed();
+
     }
 
     private void initialiseButton(){

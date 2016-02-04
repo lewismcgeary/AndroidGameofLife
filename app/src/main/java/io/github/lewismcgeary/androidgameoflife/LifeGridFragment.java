@@ -130,6 +130,9 @@ public class LifeGridFragment extends Fragment implements GameStateCallback {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        if(worldGridPresenter != null) {
+            worldGridPresenter.resetGrid();
+        }
     }
 
     @Override
