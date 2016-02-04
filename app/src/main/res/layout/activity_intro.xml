@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="io.github.lewismcgeary.androidgameoflife.IntroActivity">
-
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container" />
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
@@ -40,10 +43,7 @@
         </FrameLayout>
     </android.support.design.widget.AppBarLayout>
 
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/container" />
+
     <ImageView
         android:layout_width="96dp"
         android:layout_height="96dp"
@@ -55,5 +55,16 @@
         app:layout_behavior="io.github.lewismcgeary.androidgameoflife.ShrinkingLogoBehavior"
         android:elevation="@dimen/tool_bar_elevation"
         android:src="@mipmap/life_logo_launcher_no_pipette"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/start_reset_fab"
+        android:transitionName="@string/fab_transition_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_play_arrow_24dp"
+        android:tag="@string/start_button_text"
+        app:elevation="@dimen/floating_action_button_elevation"
+        android:visibility="gone"/>
 
 </android.support.design.widget.CoordinatorLayout>

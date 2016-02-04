@@ -1,22 +1,36 @@
 package io.github.lewismcgeary.androidgameoflife;
 
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.transition.ChangeBounds;
 import android.transition.ChangeTransform;
 import android.transition.TransitionSet;
 import android.view.Surface;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 public class IntroActivity extends AppCompatActivity implements IntroFragment.OnFragmentInteractionListener, LifeGridFragment.OnFragmentInteractionListener {
 
     AppBarLayout appBarLayout;
+    FloatingActionButton startResetFab;
+    String startButtonText;
+    String resetButtonText;
+    Drawable playIcon;
+    Drawable resetIcon;
+    Snackbar snack;
+
+    LifeGridFragment lifeGridFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +42,7 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
         appBarLayout = (AppBarLayout)findViewById(R.id.app_bar_layout);
+        initialiseButton();
         /** Button letsPlayButton = (Button)findViewById(R.id.lets_play_button);
         final AppBarLayout appBarLayout = (AppBarLayout)findViewById(R.id.app_bar_layout);
         letsPlayButton.setOnClickListener(new View.OnClickListener() {
@@ -50,8 +65,39 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
 
     @Override
     public void onBackPressed() {
+        startResetFab.hide();
         appBarLayout.setExpanded(true, true);
         super.onBackPressed();
+    }
+
+    private void initialiseButton(){
+        startResetFab = (FloatingActionButton)findViewById(R.id.start_reset_fab);
+        startButtonText = getString(R.string.start_button_text);
+        resetButtonText = getString(R.string.reset_button_text);
+        playIcon = getDrawable(R.drawable.ic_play_arrow_24dp);
+        resetIcon = getDrawable(R.drawable.ic_replay_24dp);
+        startResetFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (startResetFab.getTag().equals(startButtonText)) {
+                    showButtonInResetMode();
+                    lifeGridFragment.worldGridPresenter.passLiveCellsToModelAndStartGame();
+                } else {
+                    showButtonInStartMode();
+                    lifeGridFragment.worldGridPresenter.resetGrid();
+                }
+            }
+        });
+    }
+
+    private void showButtonInStartMode(){
+        startResetFab.setTag(startButtonText);
+        startResetFab.setImageDrawable(playIcon);
+    }
+
+    private void showButtonInResetMode(){
+        startResetFab.setTag(resetButtonText);
+        startResetFab.setImageDrawable(resetIcon);
     }
 
     private void startTransition(){
@@ -68,7 +114,7 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
         gridTransition.setDuration(600);
         gridTransition.addTransition(new ChangeBounds());
         gridTransition.addTransition((new ChangeTransform()));
-        LifeGridFragment lifeGridFragment = LifeGridFragment.newInstance(null, null);
+        lifeGridFragment = LifeGridFragment.newInstance(null, null);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         lifeGridFragment.setSharedElementEnterTransition(gridTransition);
@@ -105,24 +151,62 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
 
     }
 
-    @Override
-    public void gameOver() {
+    boolean fabShouldBeShown;
+    //this listener deals with occasions where button remains in the wrong shown/hidden state
+    //which happens if show or hide is called while it is still animating
+    FloatingActionButton.OnVisibilityChangedListener fabVisibilityListener = new FloatingActionButton.OnVisibilityChangedListener() {
+        @Override
+        public void onShown(FloatingActionButton fab) {
+            super.onShown(fab);
+            if(!fabShouldBeShown){
+                fab.hide();
+            }
+        }
 
-    }
-
-    @Override
-    public void noCellsWereSelected() {
-
-    }
+        @Override
+        public void onHidden(FloatingActionButton fab) {
+            super.onHidden(fab);
+            if(fabShouldBeShown){
+                fab.show();
+            }
+        }
+    };
 
     @Override
     public void cellDrawingInProgress() {
-
+        fabShouldBeShown = false;
+        startResetFab.hide(fabVisibilityListener);
     }
 
     @Override
     public void cellDrawingFinished() {
+        fabShouldBeShown = true;
+        //Fab can be stuck in wrong position when snackbar appears and disappears. this check ensures
+        //fab is back in the correct location
+        if(snack != null) {
+            if(!snack.isShown()) {
+                startResetFab.setTranslationY(0.0f);
+            }
+        }
+        startResetFab.show(fabVisibilityListener);
+    }
 
+    @Override
+    public void gameOver(){
+        snack = Snackbar.make(startResetFab, R.string.game_over_snackbar_text, Snackbar.LENGTH_LONG);
+        ViewGroup group = (ViewGroup) snack.getView();
+        group.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        snack.show();
+        showButtonInStartMode();
+    }
+
+    @Override
+    public void noCellsWereSelected() {
+        snack = Snackbar.make(startResetFab, R.string.starting_blank_game_snackbar_text , Snackbar.LENGTH_LONG);
+        ViewGroup group = (ViewGroup) snack.getView();
+        group.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        snack.show();
+        showButtonInStartMode();
     }
 
     @Override
