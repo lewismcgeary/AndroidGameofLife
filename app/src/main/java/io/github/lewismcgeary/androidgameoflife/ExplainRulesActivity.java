@@ -1,3 +1,5 @@
+package io.github.lewismcgeary.androidgameoflife;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
