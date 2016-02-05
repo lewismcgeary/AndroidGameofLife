@@ -17,5 +17,15 @@
     <string name="logo_transition_name">transition_logo</string>
     <string name="lets_play_button_text">Let\'s Play</string>
     <string name="read_rules_button_text">Learn More</string>
+    <string name="rules_summary_title">Game of Life</string>
+    <string name="rules_summary_text">In the Game of Life, the world is a grid of cells that are dead or alive. \n \nThis is a zero-player game.\n \nYou decide which cells are alive at the start of the game, but when play starts, the world evolves on its own following some simple rules...</string>
+    <string name="rules_fewer_than_two_title">Loneliness</string>
+    <string name="rules_fewer_than_two_text">A cell with fewer than two live neighbours dies</string>
+    <string name="rules_two_or_three_title">Stability</string>
+    <string name="rules_two_or_three_text">A live cell with two or three live neighbours survives</string>
+    <string name="rules_greater_than_three_title">Overcrowding</string>
+    <string name="rules_greater_than_three_text">A cell with more than three live neighbours dies</string>
+    <string name="rules_exactly_three_title">Conception</string>
+    <string name="rules_exactly_three_text">A dead cell with exactly three live neighbours comes to life</string>
 
 </resources>

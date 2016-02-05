@@ -15,12 +15,12 @@ public class ExplainRulesActivity extends AppIntro2 {
 
     @Override
     public void init(@Nullable Bundle savedInstanceState) {
-        CustomAppIntroFragment summaryFragment = CustomAppIntroFragment.newInstance("Game of Life", "In the Game of Life, the world is a grid of cells that are dead or alive. \n \nThis is a zero-player game.\n \nYou decide which cells are alive at the start of the game, but when play starts, the world evolves on its own following some simple rules...", R.drawable.life_logo_no_shadow_96, ContextCompat.getColor(getApplicationContext(), android.R.color.holo_orange_light));
+        CustomAppIntroFragment summaryFragment = CustomAppIntroFragment.newInstance(getString(R.string.rules_summary_title), getString(R.string.rules_summary_text), R.drawable.life_logo_no_shadow_96, ContextCompat.getColor(getApplicationContext(), R.color.rulesViewPagerBackground));
         addSlide(summaryFragment);
-        addSlide(AppIntroFragment.newInstance("Loneliness", "A cell with fewer than two live neighbours dies", R.drawable.rules_fewer_than_two_neighbours, ContextCompat.getColor(getApplicationContext(), android.R.color.holo_orange_light)));
-        addSlide(AppIntroFragment.newInstance("Stability", "A live cell with two or three live neighbours survives", R.drawable.rules_two_or_three_neighbours, ContextCompat.getColor(getApplicationContext(), android.R.color.holo_orange_light)));
-        addSlide(AppIntroFragment.newInstance("Overcrowding", "A cell with more than three live neighbours dies", R.drawable.rules_greater_than_three, ContextCompat.getColor(getApplicationContext(), android.R.color.holo_orange_light)));
-        addSlide(AppIntroFragment.newInstance("Conception", "A dead cell with exactly three live neighbours comes to life", R.drawable.rules_exactly_three, ContextCompat.getColor(getApplicationContext(), android.R.color.holo_orange_light)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.rules_fewer_than_two_title), getString(R.string.rules_fewer_than_two_text), R.drawable.rules_fewer_than_two_neighbours, ContextCompat.getColor(getApplicationContext(), R.color.rulesViewPagerBackground)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.rules_two_or_three_title), getString(R.string.rules_two_or_three_text), R.drawable.rules_two_or_three_neighbours, ContextCompat.getColor(getApplicationContext(), R.color.rulesViewPagerBackground)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.rules_greater_than_three_title), getString(R.string.rules_greater_than_three_text), R.drawable.rules_greater_than_three, ContextCompat.getColor(getApplicationContext(), R.color.rulesViewPagerBackground)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.rules_exactly_three_title), getString(R.string.rules_exactly_three_text), R.drawable.rules_exactly_three, ContextCompat.getColor(getApplicationContext(), R.color.rulesViewPagerBackground)));
 
     }
 
