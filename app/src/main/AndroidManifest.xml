@@ -13,11 +13,14 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
-        <activity android:name="io.github.lewismcgeary.androidgameoflife.ExplainRulesActivity" >
+        <activity android:name="io.github.lewismcgeary.androidgameoflife.ExplainRulesActivity"
+            android:label="@string/app_intro" >
             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
