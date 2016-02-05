@@ -50,7 +50,9 @@ public class GridPresenter {
     }
 
     public void resetGrid(){
-        calculateUpdateTask.cancel(true);
+        if(calculateUpdateTask != null) {
+            calculateUpdateTask.cancel(true);
+        }
         worldGrid.killAllCells();
         worldGridLayout.killAllCells();
         worldGridLayout.setEnabled(true);

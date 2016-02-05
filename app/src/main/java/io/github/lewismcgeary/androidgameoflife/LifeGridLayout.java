@@ -5,6 +5,7 @@ import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.GridLayout;
 
 import java.util.ArrayList;
@@ -44,17 +45,34 @@ public class LifeGridLayout extends GridLayout {
                 this.addView(lifeCell);
             }
         }
-
-        this.post(new Runnable() {
+        lifeCell = (LifeCellView) getChildAt(0);
+        final ViewTreeObserver.OnGlobalLayoutListener listener = new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
-            public void run() {
-                //after layout is drawn, use first cell as an anchor to work out any coordinates
-                lifeCell = (LifeCellView) getChildAt(0);
+            public void onGlobalLayout() {
                 leftOrigin = lifeCell.getX();
                 topOrigin = lifeCell.getY();
                 cellPixelSize = lifeCell.getWidth();
             }
-        });
+        };
+        lifeCell.getViewTreeObserver().addOnGlobalLayoutListener(listener);
+        /**lifeCell.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                leftOrigin = lifeCell.getX();
+                topOrigin = lifeCell.getY();
+                cellPixelSize = lifeCell.getWidth();
+            }
+        });*/
+        /**lifeCell.post(new Runnable() {
+            @Override
+            public void run() {
+                //after layout is drawn, use first cell as an anchor to work out any coordinates
+
+                leftOrigin = lifeCell.getX();
+                topOrigin = lifeCell.getY();
+                cellPixelSize = lifeCell.getWidth();
+            }
+        });*/
         this.setOnTouchListener(new OnTouchListener() {
             long touchStartTime;
             long touchEventCurrentTime;
@@ -73,6 +91,7 @@ public class LifeGridLayout extends GridLayout {
                     //the first cell touched determines which action is being performed
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
+                            lifeCell.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
                             touchStartTime = SystemClock.elapsedRealtime();
                             if (lifeCell.isCellAlive()) {
                                 lifeCell.makeCellViewDead();

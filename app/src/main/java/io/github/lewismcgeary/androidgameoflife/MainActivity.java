@@ -3,19 +3,24 @@ package io.github.lewismcgeary.androidgameoflife;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
+import android.transition.ChangeBounds;
+import android.transition.ChangeTransform;
+import android.transition.TransitionSet;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
-public class LifeGameActivity extends AppCompatActivity implements GameStateCallback {
-    GridPresenter worldGridPresenter;
-    LifeGridLayout worldGridLayout;
+public class MainActivity extends AppCompatActivity implements IntroFragment.OnFragmentInteractionListener, LifeGridFragment.OnFragmentInteractionListener {
+
+    AppBarLayout appBarLayout;
     FloatingActionButton startResetFab;
     String startButtonText;
     String resetButtonText;
@@ -23,19 +28,51 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
     Drawable resetIcon;
     Snackbar snack;
 
+    LifeGridFragment lifeGridFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setFixedScreenOrientation();
-        setContentView(R.layout.activity_life_game);
-        worldGridLayout = (LifeGridLayout)findViewById(R.id.life_grid_layout);
-        worldGridLayout.setCallback(this);
-        worldGridLayout.post(new Runnable() {
+        setContentView(R.layout.activity_main);
+        IntroFragment fragment = IntroFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
+        appBarLayout = (AppBarLayout)findViewById(R.id.app_bar_layout);
+        setAppBarDragging(false);
+        initialiseButton();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        showButtonInStartMode();
+        startResetFab.hide();
+        appBarLayout.setExpanded(true, true);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+
+    }
+
+    private void setAppBarDragging(final boolean newValue) {
+        CoordinatorLayout.LayoutParams params =
+                (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+        AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
+        behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
             @Override
-            public void run() {
-                setUpGrid();
+            public boolean canDrag(AppBarLayout appBarLayout) {
+                return newValue;
             }
         });
+        params.setBehavior(behavior);
+    }
+
+    private void initialiseButton(){
         startResetFab = (FloatingActionButton)findViewById(R.id.start_reset_fab);
         startButtonText = getString(R.string.start_button_text);
         resetButtonText = getString(R.string.reset_button_text);
@@ -46,18 +83,43 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
             public void onClick(View v) {
                 if (startResetFab.getTag().equals(startButtonText)) {
                     showButtonInResetMode();
-                    worldGridPresenter.passLiveCellsToModelAndStartGame();
+                    lifeGridFragment.worldGridPresenter.passLiveCellsToModelAndStartGame();
                 } else {
                     showButtonInStartMode();
-                    worldGridPresenter.resetGrid();
+                    lifeGridFragment.worldGridPresenter.resetGrid();
                 }
             }
         });
     }
 
+    private void showButtonInStartMode(){
+        startResetFab.setTag(startButtonText);
+        startResetFab.setImageDrawable(playIcon);
+    }
+
+    private void showButtonInResetMode(){
+        startResetFab.setTag(resetButtonText);
+        startResetFab.setImageDrawable(resetIcon);
+    }
+
+    private void startTransition(){
+        TransitionSet gridTransition = new TransitionSet();
+        gridTransition.setDuration(600);
+        gridTransition.addTransition(new ChangeBounds());
+        gridTransition.addTransition((new ChangeTransform()));
+        lifeGridFragment = LifeGridFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        lifeGridFragment.setSharedElementEnterTransition(gridTransition);
+        fragmentTransaction.addSharedElement(findViewById(R.id.intro_card_view), getString(R.string.card_view_transition_name));
+        fragmentTransaction.replace(R.id.container, lifeGridFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+        appBarLayout.setExpanded(false, true);
+    }
+
     private void setFixedScreenOrientation(){
-        //game can be started in any orientation but once GameActivity is reached it will stay in
-        //the orientation it starts in
+        //stop screen from rotating during game
         int orientation = getWindowManager().getDefaultDisplay().getRotation();
 
         switch(orientation) {
@@ -74,43 +136,6 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 break;
         }
-    }
-
-    private void setUpGrid() {
-        int densityOfScreen = DisplayMetrics.DENSITY_DEFAULT;
-        int cellSize = (int) getResources().getDimension(R.dimen.cell_size);
-        int moveDuration = getResources().getInteger(R.integer.move_duration);
-        //get the width and height of grid in dp
-        int gridWidth = worldGridLayout.getMeasuredWidth() / (densityOfScreen / 160);
-        int gridHeight = worldGridLayout.getMeasuredHeight() / (densityOfScreen / 160);
-        //calculate number of columns and rows that will fit on screen
-        int numberOfColumns = gridWidth/cellSize;
-        int numberOfRows = gridHeight/cellSize;
-        //calculate the margins needed to centre the cells in the layout
-        float unusedWidthDp = gridWidth - numberOfColumns * cellSize;
-        float unusedHeightDp = gridHeight - numberOfRows * cellSize;
-        float unusedWidthPx = unusedWidthDp * (densityOfScreen / 160);
-        float unusedHeightPx = unusedHeightDp * (densityOfScreen / 160);
-        int leftRightMargin = (int) unusedWidthPx / 2;
-        int topBottomMargin = (int) unusedHeightPx / 2;
-        //apply the calculated values
-        FrameLayout.LayoutParams worldGridLayoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-        worldGridLayoutParams.setMargins(leftRightMargin, topBottomMargin, leftRightMargin, topBottomMargin);
-        worldGridLayout.setLayoutParams(worldGridLayoutParams);
-        worldGridLayout.setColumnCount(numberOfColumns);
-        worldGridLayout.setRowCount(numberOfRows);
-        worldGridPresenter = new GridPresenter(worldGridLayout, moveDuration);
-        worldGridPresenter.setInitialState();
-    }
-
-    private void showButtonInStartMode(){
-        startResetFab.setTag(startButtonText);
-        startResetFab.setImageDrawable(playIcon);
-    }
-
-    private void showButtonInResetMode(){
-        startResetFab.setTag(resetButtonText);
-        startResetFab.setImageDrawable(resetIcon);
     }
 
     boolean fabShouldBeShown;
@@ -169,5 +194,11 @@ public class LifeGameActivity extends AppCompatActivity implements GameStateCall
         group.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         snack.show();
         showButtonInStartMode();
+    }
+
+    @Override
+    public void letsPlay() {
+        setFixedScreenOrientation();
+        startTransition();
     }
 }
