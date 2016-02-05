@@ -35,10 +35,17 @@ public class IntroFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_intro_card, container, false);
         Button letsPlayButton = (Button)view.findViewById(R.id.lets_play_button);
+        Button readRulesButton = (Button)view.findViewById(R.id.read_rules_button);
         letsPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.letsPlay();
+            }
+        });
+        readRulesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.readRules();
             }
         });
         return view;
@@ -65,5 +72,7 @@ public class IntroFragment extends Fragment {
     public interface OnFragmentInteractionListener {
 
         void letsPlay();
+
+        void readRules();
     }
 }

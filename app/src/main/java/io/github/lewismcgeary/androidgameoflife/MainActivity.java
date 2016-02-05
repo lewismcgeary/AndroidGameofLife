@@ -1,5 +1,6 @@
 package io.github.lewismcgeary.androidgameoflife;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -201,4 +202,12 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
         setFixedScreenOrientation();
         startTransition();
     }
+
+    @Override
+    public void readRules() {
+        Intent intent = new Intent(this, ExplainRulesActivity.class);
+        startActivity(intent);
+    }
+
+
 }
