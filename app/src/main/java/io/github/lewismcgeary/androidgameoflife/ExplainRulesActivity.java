@@ -2,6 +2,7 @@ package io.github.lewismcgeary.androidgameoflife;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
@@ -14,10 +15,10 @@ public class ExplainRulesActivity extends AppIntro2 {
 
     @Override
     public void init(@Nullable Bundle savedInstanceState) {
-        addSlide(AppIntroFragment.newInstance("test", "A cell with fewer than two live neighbours dies", R.drawable.life_cell_vector, R.color.colorPrimaryDark));
-        addSlide(AppIntroFragment.newInstance("test2", "A live cell with two or three live neighbours survives", R.drawable.life_cell_vector, R.color.colorPrimaryDark));
-        addSlide(AppIntroFragment.newInstance("test3", "A cell with more than three live neighbours will die", R.drawable.life_cell_vector, R.color.colorPrimaryDark));
-        addSlide(AppIntroFragment.newInstance("test4", "A dead cell with three live neighbours will come to life", R.drawable.life_cell_vector, R.color.colorPrimaryDark));
+        addSlide(AppIntroFragment.newInstance("test", "A cell with fewer than two live neighbours dies", R.drawable.rules_fewer_than_two_neighbours, ContextCompat.getColor(getApplicationContext(), android.R.color.holo_orange_light)));
+        addSlide(AppIntroFragment.newInstance("test2", "A live cell with two or three live neighbours survives", R.drawable.rules_two_or_three_neighbours, ContextCompat.getColor(getApplicationContext(), android.R.color.holo_orange_light)));
+        addSlide(AppIntroFragment.newInstance("test3", "A cell with more than three live neighbours will die", R.drawable.rules_greater_than_three, ContextCompat.getColor(getApplicationContext(), android.R.color.holo_orange_light)));
+        addSlide(AppIntroFragment.newInstance("test4", "A dead cell with three live neighbours will come to life", R.drawable.rules_exactly_three, ContextCompat.getColor(getApplicationContext(), android.R.color.holo_orange_light)));
 
     }
 
