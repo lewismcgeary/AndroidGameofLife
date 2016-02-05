@@ -11,16 +11,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.transition.ChangeBounds;
 import android.transition.ChangeTransform;
 import android.transition.TransitionSet;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-public class IntroActivity extends AppCompatActivity implements IntroFragment.OnFragmentInteractionListener, LifeGridFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements IntroFragment.OnFragmentInteractionListener, LifeGridFragment.OnFragmentInteractionListener {
 
     AppBarLayout appBarLayout;
     FloatingActionButton startResetFab;
@@ -35,7 +33,7 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
+        setContentView(R.layout.activity_main);
         IntroFragment fragment = IntroFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -44,22 +42,10 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
         appBarLayout = (AppBarLayout)findViewById(R.id.app_bar_layout);
         setAppBarDragging(false);
         initialiseButton();
-        /** Button letsPlayButton = (Button)findViewById(R.id.lets_play_button);
-        final AppBarLayout appBarLayout = (AppBarLayout)findViewById(R.id.app_bar_layout);
-        letsPlayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setFixedScreenOrientation();
-                startTransition();
-                //appBarLayout.setExpanded(false, true);
-            }
-        });*/
     }
 
     @Override
     protected void onResume() {
-        //allows screen to rotate again. Screen orientation is fixed while transitioning between
-        //activities
         super.onResume();
     }
 
@@ -117,15 +103,6 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
     }
 
     private void startTransition(){
-        CardView introCardView = (CardView)findViewById(R.id.intro_card_view);
-        ImageView logo = (ImageView)findViewById(R.id.app_logo);
-        /** Intent intent = new Intent(this, LifeGameActivity.class);
-        Pair<View, String> pair1 = Pair.create((View)introCardView, getString(R.string.card_view_transition_name));
-        Pair<View, String> pair3 = Pair.create((View)logo, getString(R.string.logo_transition_name));
-        ActivityOptionsCompat options =
-                ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1, pair3);
-        ActivityCompat.startActivity(this, intent, options.toBundle());*/
-
         TransitionSet gridTransition = new TransitionSet();
         gridTransition.setDuration(600);
         gridTransition.addTransition(new ChangeBounds());
@@ -142,8 +119,7 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
     }
 
     private void setFixedScreenOrientation(){
-        //setting fixed orientation before switching to the next activity avoids an error if device
-        //is in a different orientation when back button is pressed to return to this activity
+        //stop screen from rotating during game
         int orientation = getWindowManager().getDefaultDisplay().getRotation();
 
         switch(orientation) {

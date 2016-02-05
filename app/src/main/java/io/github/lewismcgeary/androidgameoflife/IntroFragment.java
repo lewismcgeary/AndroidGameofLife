@@ -19,7 +19,6 @@ public class IntroFragment extends Fragment {
     /**
      * @return A new instance of fragment IntroFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static IntroFragment newInstance() {
         IntroFragment fragment = new IntroFragment();
         return fragment;

@@ -5,11 +5,11 @@ package io.github.lewismcgeary.androidgameoflife;
  */
 public interface GameStateCallback {
 
-    public void gameOver();
+    void gameOver();
 
-    public void noCellsWereSelected();
+    void noCellsWereSelected();
 
-    public void cellDrawingInProgress();
+    void cellDrawingInProgress();
 
-    public void cellDrawingFinished();
+    void cellDrawingFinished();
 }
