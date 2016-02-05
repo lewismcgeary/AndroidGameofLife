@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<set xmlns:android="http://schemas.android.com/apk/res/android">
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ordering="sequentially">
     <objectAnimator
-        android:duration="@integer/animation_duration"
+        android:startOffset="1000"
+        android:duration="600"
         android:propertyName="fillAlpha"
         android:valueFrom="0"
         android:valueTo="1"/>
     <objectAnimator
-        android:duration="@integer/animation_duration"
+        android:duration="600"
         android:propertyName="fillAlpha"
         android:valueFrom="1"
         android:valueTo="0"/>
