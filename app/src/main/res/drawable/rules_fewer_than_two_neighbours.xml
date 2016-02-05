@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="@dimen/rule_diagram_size"
+    android:height="@dimen/rule_diagram_size"
+    android:viewportHeight="72"
+    android:viewportWidth="72"
+    android:alpha="1"
+    android:name="whole cell alpha">
+    <path
+        android:name="@string/cell_name"
+        android:pathData="@string/live_cell_path"
+        android:fillColor="@color/colorPrimaryDark"/>
+    <group
+        android:translateY="24"
+        android:translateX="24">
+    <path
+        android:name="@string/cell_name"
+        android:pathData="@string/live_cell_path"
+        android:fillColor="@color/colorPrimaryDark" />
+    </group>
+    <path
+        android:pathData="M0,0, h72 v72 h-72 v-72 M24,0 v72 M48,0 v72 M0,24 h72 M0,48 h72"
+        android:strokeColor="@android:color/black"
+        android:strokeWidth="1"
+        android:strokeAlpha="0.1"/>
+    <group
+        android:translateY="24"
+        android:translateX="24">
+        <path
+            android:name="@string/cell_name"
+            android:pathData="@string/live_cell_path"
+            android:strokeColor="@android:color/white"
+            android:strokeWidth="1"/>
+    </group>
+</vector>

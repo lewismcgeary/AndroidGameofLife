@@ -30,6 +30,15 @@
 
                     android:text="@string/introduction_text" />
                 <Button
+                    android:id="@+id/read_rules_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/intro_text_view"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:text="@string/read_rules_button_text" />
+                <Button
                     android:id="@+id/lets_play_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

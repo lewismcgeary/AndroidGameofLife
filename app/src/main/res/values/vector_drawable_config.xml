@@ -2,7 +2,7 @@
 <resources>
     <string name="cell_name">square cell</string>
 
-    <string name="dead_cell_path">M12,12 L12,12 12,12 12,12</string>
+    <string name="dead_cell_path">M12,12 L12,12 12,12 12,12 z</string>
 
-    <string name="live_cell_path">M0,0 L24,0 24,24 0,24</string>
+    <string name="live_cell_path">M0,0 L24,0 24,24 0,24 z</string>
 </resources>
