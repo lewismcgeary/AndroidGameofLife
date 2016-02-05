@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="72dp"
-    android:height="72dp"
+    android:width="@dimen/rule_diagram_size"
+    android:height="@dimen/rule_diagram_size"
     android:viewportHeight="72"
     android:viewportWidth="72"
     android:alpha="1"
@@ -10,6 +10,7 @@
         android:name="@string/cell_name"
         android:pathData="@string/live_cell_path"
         android:fillColor="@color/colorPrimaryDark"/>
+
 
     <group
         android:translateY="48"
@@ -26,5 +27,14 @@
             android:name="@string/cell_name"
             android:pathData="@string/live_cell_path"
             android:fillColor="@color/colorPrimaryDark" />
+    </group>
+    <group
+        android:translateY="24"
+        android:translateX="24">
+        <path
+            android:name="@string/cell_name"
+            android:pathData="@string/live_cell_path"
+            android:strokeColor="@android:color/black"
+            android:strokeWidth="1"/>
     </group>
 </vector>

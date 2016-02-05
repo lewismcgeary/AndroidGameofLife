@@ -6,4 +6,6 @@
     <dimen name="floating_action_button_elevation">6dp</dimen>
     <dimen name="tool_bar_elevation">4dp</dimen>
     <dimen name="tool_bar_height">56dp</dimen>
+
+    <dimen name="rule_diagram_size">144dp</dimen>
 </resources>
