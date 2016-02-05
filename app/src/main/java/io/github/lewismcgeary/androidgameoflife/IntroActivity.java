@@ -2,7 +2,6 @@ package io.github.lewismcgeary.androidgameoflife;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -37,7 +36,7 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
-        IntroFragment fragment = IntroFragment.newInstance(null, null);
+        IntroFragment fragment = IntroFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment);
@@ -131,7 +130,7 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
         gridTransition.setDuration(600);
         gridTransition.addTransition(new ChangeBounds());
         gridTransition.addTransition((new ChangeTransform()));
-        lifeGridFragment = LifeGridFragment.newInstance(null, null);
+        lifeGridFragment = LifeGridFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         lifeGridFragment.setSharedElementEnterTransition(gridTransition);
@@ -161,11 +160,6 @@ public class IntroActivity extends AppCompatActivity implements IntroFragment.On
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 break;
         }
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     boolean fabShouldBeShown;

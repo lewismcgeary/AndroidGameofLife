@@ -2,7 +2,6 @@ package io.github.lewismcgeary.androidgameoflife;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -41,7 +40,7 @@ public class LifeGameActivity extends AppCompatActivity implements LifeGridFragm
             }
         }); */
         FrameLayout container = (FrameLayout)findViewById(R.id.container);
-        lifeGridFragment = LifeGridFragment.newInstance(null, null);
+        lifeGridFragment = LifeGridFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, lifeGridFragment);
@@ -179,10 +178,5 @@ public class LifeGameActivity extends AppCompatActivity implements LifeGridFragm
         group.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         snack.show();
         showButtonInStartMode();
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 }
