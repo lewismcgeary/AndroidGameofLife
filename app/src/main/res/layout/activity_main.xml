@@ -54,7 +54,7 @@
         app:layout_scrollFlags="scroll"
         app:layout_behavior="io.github.lewismcgeary.androidgameoflife.ShrinkingLogoBehavior"
         android:elevation="@dimen/tool_bar_elevation"
-        android:src="@drawable/life_logo_no_shadow_96"/>
+        android:src="@drawable/life_logo_no_shadow_368"/>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/start_reset_fab"
         android:transitionName="@string/fab_transition_name"
