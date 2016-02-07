@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
         setFixedScreenOrientation(false);
         IntroFragment fragment = IntroFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
+        //When fresh activity is created, clear out any fragments in back stack
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
