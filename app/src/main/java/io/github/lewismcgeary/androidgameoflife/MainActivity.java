@@ -35,8 +35,11 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setFixedScreenOrientation(false);
         IntroFragment fragment = IntroFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
+        //When fresh activity is created, clear out any fragments in back stack
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
         showButtonInStartMode();
         startResetFab.hide();
         appBarLayout.setExpanded(true, true);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        setFixedScreenOrientation(false);
 
     }
 
@@ -119,23 +122,27 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
         appBarLayout.setExpanded(false, true);
     }
 
-    private void setFixedScreenOrientation(){
-        //stop screen from rotating during game
-        int orientation = getWindowManager().getDefaultDisplay().getRotation();
+    private void setFixedScreenOrientation(boolean lockorientation){
+        if(lockorientation) {
+            //stop screen from rotating during game
+            int orientation = getWindowManager().getDefaultDisplay().getRotation();
 
-        switch(orientation) {
-            case Surface.ROTATION_180:
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
-                break;
-            case Surface.ROTATION_270:
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
-                break;
-            case  Surface.ROTATION_0:
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                break;
-            case Surface.ROTATION_90:
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                break;
+            switch (orientation) {
+                case Surface.ROTATION_180:
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+                    break;
+                case Surface.ROTATION_270:
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                    break;
+                case Surface.ROTATION_0:
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    break;
+                case Surface.ROTATION_90:
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    break;
+            }
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
     }
 
@@ -199,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
 
     @Override
     public void letsPlay() {
-        setFixedScreenOrientation();
+        setFixedScreenOrientation(true);
         startTransition();
     }
 
