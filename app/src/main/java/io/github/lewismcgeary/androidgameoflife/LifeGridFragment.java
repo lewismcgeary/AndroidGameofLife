@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -18,6 +19,7 @@ public class LifeGridFragment extends Fragment implements GameStateCallback {
 
     GridPresenter worldGridPresenter;
     LifeGridLayout worldGridLayout;
+    ViewTreeObserver.OnGlobalLayoutListener listener;
 
     public LifeGridFragment() {
         // Required empty public constructor
@@ -43,12 +45,19 @@ public class LifeGridFragment extends Fragment implements GameStateCallback {
         View view =  inflater.inflate(R.layout.fragment_life_grid, container, false);
         worldGridLayout = (LifeGridLayout)view.findViewById(R.id.life_grid_layout);
         worldGridLayout.setCallback(this);
-        worldGridLayout.post(new Runnable() {
+        /**worldGridLayout.post(new Runnable() {
             @Override
             public void run() {
                 setUpGrid();
             }
-        });
+        });*/
+        listener = new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                setUpGrid();
+            }
+        };
+        worldGridLayout.getViewTreeObserver().addOnGlobalLayoutListener(listener);
         ImageView touchIcon = (ImageView)view.findViewById(R.id.touch_icon);
         AnimatedVectorDrawable touchAnimation = (AnimatedVectorDrawable)touchIcon.getDrawable();
         touchAnimation.start();
@@ -78,6 +87,7 @@ public class LifeGridFragment extends Fragment implements GameStateCallback {
         worldGridLayout.setLayoutParams(worldGridLayoutParams);
         worldGridLayout.setColumnCount(numberOfColumns);
         worldGridLayout.setRowCount(numberOfRows);
+        worldGridLayout.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
         worldGridPresenter = new GridPresenter(worldGridLayout, moveDuration);
         worldGridPresenter.setInitialState();
     }
