@@ -59,6 +59,20 @@ public class LifeGridFragment extends Fragment implements GameStateCallback {
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        worldGridPresenter.pauseGame();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(worldGridPresenter != null) {
+            worldGridPresenter.resumeGame();
+        }
+    }
+
     private void setUpGrid() {
         int densityOfScreen = DisplayMetrics.DENSITY_DEFAULT;
         int cellSize = (int) getResources().getDimension(R.dimen.cell_size);
