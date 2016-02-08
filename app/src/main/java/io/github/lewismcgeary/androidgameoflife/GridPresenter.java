@@ -13,6 +13,7 @@ public class GridPresenter {
     LifeGridLayout worldGridLayout;
     int moveDuration;
     private CalculateUpdateTask calculateUpdateTask;
+    private boolean gamePaused = false;
 
     public GridPresenter(LifeGridLayout newWorldGridLayout, int moveDuration) {
         worldGridLayout = newWorldGridLayout;
@@ -47,6 +48,23 @@ public class GridPresenter {
     public void startConstantUpdate() {
         calculateUpdateTask = new CalculateUpdateTask();
         calculateUpdateTask.execute();
+    }
+
+    public void pauseGame(){
+        //check if there is an existing running async task
+        if(calculateUpdateTask !=null) {
+            if (!calculateUpdateTask.isCancelled()) {
+                calculateUpdateTask.cancel(true);
+                gamePaused = true;
+            }
+        }
+    }
+
+    public void resumeGame(){
+        if(gamePaused){
+            startConstantUpdate();
+            gamePaused = false;
+        }
     }
 
     public void resetGrid(){
