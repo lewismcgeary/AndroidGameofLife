@@ -4,5 +4,8 @@
     <target
         android:animation="@animator/fade_in_fade_out"
         android:name="touch icon"/>
+    <target
+        android:animation="@animator/move_hand_animator"
+        android:name="move hand"/>
 
 </animated-vector>
