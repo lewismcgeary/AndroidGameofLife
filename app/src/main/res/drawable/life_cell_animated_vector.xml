@@ -3,5 +3,5 @@
     android:drawable="@drawable/life_cell_vector_dead">
     <target
         android:animation="@animator/cell_born_animator"
-        android:name="@string/cell_name"/>
+        android:name="@string/scale_group_name"/>
 </animated-vector>

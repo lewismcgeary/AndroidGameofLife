@@ -4,8 +4,15 @@
     android:height="@dimen/cell_size"
     android:viewportHeight="24"
     android:viewportWidth="24">
-    <path
-        android:name="@string/cell_name"
-        android:pathData="@string/dead_cell_path"
-        android:fillColor="@color/colorPrimaryDark"/>
+    <group
+        android:name="@string/scale_group_name"
+        android:pivotX="12"
+        android:pivotY="12"
+        android:scaleX="0"
+        android:scaleY="0">
+        <path
+            android:name="@string/cell_name"
+            android:fillColor="@color/colorPrimaryDark"
+            android:pathData="@string/live_cell_path" />
+    </group>
 </vector>

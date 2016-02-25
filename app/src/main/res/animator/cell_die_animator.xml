@@ -3,8 +3,6 @@
     >
     <objectAnimator
         android:duration="@integer/animation_duration"
-        android:propertyName="pathData"
-        android:valueType="pathType"
-        android:valueFrom="@string/live_cell_path"
-        android:valueTo="@string/dead_cell_path" />
+        android:valueFrom="1"
+        android:valueTo="0" />
 </set>

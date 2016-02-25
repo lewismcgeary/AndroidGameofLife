@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="whole cell alpha"
     android:width="@dimen/cell_size"
     android:height="@dimen/cell_size"
-    android:viewportHeight="24"
-    android:viewportWidth="24"
     android:alpha="1"
-    android:name="whole cell alpha">
-    <path
-        android:name="@string/cell_name"
-        android:pathData="@string/live_cell_path"
-        android:fillColor="@color/colorPrimaryDark"/>
+    android:viewportHeight="24"
+    android:viewportWidth="24">
+    <group
+        android:name="@string/scale_group_name"
+        android:scaleX="1"
+        android:scaleY="1">
+        <path
+            android:name="@string/cell_name"
+            android:fillColor="@color/colorPrimaryDark"
+            android:pathData="@string/live_cell_path" />
+    </group>
 </vector>

@@ -5,4 +5,5 @@
     <string name="dead_cell_path">M12,12 L12,12 12,12 12,12 z</string>
 
     <string name="live_cell_path">M0,0 L24,0 24,24 0,24 z</string>
+    <string name="scale_group_name">scale group</string>
 </resources>
