@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
                 }
             }
         });
+        showButtonInStartMode();
     }
 
     private void showButtonInStartMode(){
