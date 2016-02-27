@@ -6,6 +6,7 @@
     <dimen name="floating_action_button_elevation">6dp</dimen>
     <dimen name="tool_bar_elevation">4dp</dimen>
     <dimen name="tool_bar_height">56dp</dimen>
+    <dimen name="toolbar_logo_size">96dp</dimen>
     <dimen name="collapsing_toolbar_height">120dp</dimen>
     <dimen name="top_margin_of_intro_card">160dp</dimen>
 
