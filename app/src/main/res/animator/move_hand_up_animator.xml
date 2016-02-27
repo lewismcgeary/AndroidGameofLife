@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:ordering="sequentially">
+    <!--
+    first objectAnimator is just to provide a delay before the animation starts
+    using startOffset for this purpose does not work well with AnimatedVectorDrawables
+    -->
     <objectAnimator
         android:duration="1000"
         android:propertyName="translateY"
