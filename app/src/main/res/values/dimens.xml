@@ -8,4 +8,5 @@
     <dimen name="tool_bar_height">56dp</dimen>
 
     <dimen name="rule_diagram_size">144dp</dimen>
+    <dimen name="rules_intro_textview_padding">64dp</dimen>
 </resources>

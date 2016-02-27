@@ -40,8 +40,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@android:color/white"
-        android:paddingLeft="64dp"
-        android:paddingRight="64dp"
+        android:paddingLeft="@dimen/rules_intro_textview_padding"
+        android:paddingRight="@dimen/rules_intro_textview_padding"
         android:textSize="16sp"
         android:id="@+id/description" />
     <TextView
