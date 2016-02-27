@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="collapsing_toolbar_height">80dp</dimen>
+    <dimen name="top_margin_of_intro_card">120dp</dimen>
+    <dimen name="top_margin_of_game_grid">64dp</dimen>
+</resources>

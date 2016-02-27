@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="rules_intro_textview_padding">16dp</dimen>
+    <dimen name="toolbar_logo_size">72dp</dimen>
+</resources>
