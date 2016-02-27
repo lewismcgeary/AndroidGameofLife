@@ -3,6 +3,7 @@ package io.github.lewismcgeary.androidgameoflife;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -12,6 +13,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.ChangeBounds;
+import android.transition.ChangeTransform;
+import android.transition.TransitionSet;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,14 +109,18 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
     }
 
     private void startTransition(){
-        //TransitionSet gridTransition = new TransitionSet();
-        //gridTransition.setDuration(600);
-        //gridTransition.addTransition(new ChangeBounds());
-        //gridTransition.addTransition((new ChangeTransform()));
         lifeGridFragment = LifeGridFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //lifeGridFragment.setSharedElementEnterTransition(gridTransition);
+        if(Build.VERSION.SDK_INT >= 21) {
+            TransitionSet gridTransition = new TransitionSet();
+            gridTransition.setDuration(600);
+            gridTransition.addTransition(new ChangeBounds());
+            gridTransition.addTransition((new ChangeTransform()));
+            lifeGridFragment.setSharedElementEnterTransition(gridTransition);
+        }
+
+
         fragmentTransaction.addSharedElement(findViewById(R.id.intro_card_view), getString(R.string.card_view_transition_name));
         fragmentTransaction.replace(R.id.container, lifeGridFragment);
         fragmentTransaction.addToBackStack(null);
