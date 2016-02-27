@@ -3,6 +3,7 @@ package io.github.lewismcgeary.androidgameoflife;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -80,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
         startResetFab = (FloatingActionButton)findViewById(R.id.start_reset_fab);
         startButtonText = getString(R.string.start_button_text);
         resetButtonText = getString(R.string.reset_button_text);
-        playIcon = getDrawable(R.drawable.ic_play_arrow_24dp);
-        resetIcon = getDrawable(R.drawable.ic_replay_24dp);
+        playIcon = ContextCompat.getDrawable(this, R.drawable.ic_play_arrow_24dp);
+        resetIcon = ContextCompat.getDrawable(this, R.drawable.ic_replay_24dp);
         startResetFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
                 }
             }
         });
+        showButtonInStartMode();
     }
 
     private void showButtonInStartMode(){
@@ -107,14 +109,18 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
     }
 
     private void startTransition(){
-        TransitionSet gridTransition = new TransitionSet();
-        gridTransition.setDuration(600);
-        gridTransition.addTransition(new ChangeBounds());
-        gridTransition.addTransition((new ChangeTransform()));
         lifeGridFragment = LifeGridFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        lifeGridFragment.setSharedElementEnterTransition(gridTransition);
+        if(Build.VERSION.SDK_INT >= 21) {
+            TransitionSet gridTransition = new TransitionSet();
+            gridTransition.setDuration(600);
+            gridTransition.addTransition(new ChangeBounds());
+            gridTransition.addTransition((new ChangeTransform()));
+            lifeGridFragment.setSharedElementEnterTransition(gridTransition);
+        }
+
+
         fragmentTransaction.addSharedElement(findViewById(R.id.intro_card_view), getString(R.string.card_view_transition_name));
         fragmentTransaction.replace(R.id.container, lifeGridFragment);
         fragmentTransaction.addToBackStack(null);

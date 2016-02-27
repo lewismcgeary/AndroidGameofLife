@@ -1,8 +1,8 @@
 package io.github.lewismcgeary.androidgameoflife;
 
 import android.content.Context;
-import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
+import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -54,7 +54,8 @@ public class LifeGridFragment extends Fragment implements GameStateCallback {
         //wait until layout is drawn before running setup calculations on its measurements
         worldGridLayout.getViewTreeObserver().addOnGlobalLayoutListener(listener);
         ImageView touchIcon = (ImageView)view.findViewById(R.id.touch_icon);
-        AnimatedVectorDrawable touchAnimation = (AnimatedVectorDrawable)touchIcon.getDrawable();
+        AnimatedVectorDrawableCompat touchAnimation = AnimatedVectorDrawableCompat.create(getContext(), R.drawable.touch_animated_vector);
+        touchIcon.setImageDrawable(touchAnimation);
         touchAnimation.start();
         return view;
     }

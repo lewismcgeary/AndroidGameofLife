@@ -30,7 +30,7 @@ public class LifeGridLayout extends GridLayout {
         super(context, attrs);
         this.context = context;
         this.attrs = attrs;
-        this.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+        //this.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
     }
 
     public void setCallback(GameStateCallback callback){

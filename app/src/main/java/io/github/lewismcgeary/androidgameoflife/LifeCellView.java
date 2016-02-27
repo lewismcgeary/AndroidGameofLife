@@ -1,8 +1,7 @@
 package io.github.lewismcgeary.androidgameoflife;
 
 import android.content.Context;
-import android.graphics.drawable.AnimatedVectorDrawable;
-import android.support.v4.content.ContextCompat;
+import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
@@ -10,8 +9,8 @@ import android.widget.ImageView;
  * Created by Lewis on 17/11/15.
  */
 public class LifeCellView extends ImageView {
-    private AnimatedVectorDrawable animatedCellDrawableBorn;
-    private AnimatedVectorDrawable animatedCellDrawableDie;
+    private AnimatedVectorDrawableCompat animatedCellDrawableBorn;
+    private AnimatedVectorDrawableCompat animatedCellDrawableDie;
     private Boolean cellAlive = false;
 
     public LifeCellView(Context context) {
@@ -26,8 +25,8 @@ public class LifeCellView extends ImageView {
 
     private void initialiseDrawables(Context context){
         setImageResource(R.drawable.life_cell_vector_dead);
-        animatedCellDrawableBorn = (AnimatedVectorDrawable) ContextCompat.getDrawable(context, R.drawable.life_cell_animated_vector);
-        animatedCellDrawableDie = (AnimatedVectorDrawable) ContextCompat.getDrawable(context, R.drawable.life_cell_animated_vector_die);
+        animatedCellDrawableBorn = AnimatedVectorDrawableCompat.create(context, R.drawable.life_cell_animated_vector);
+        animatedCellDrawableDie = AnimatedVectorDrawableCompat.create(context, R.drawable.life_cell_animated_vector_die);
     }
 
     public void makeCellViewLive() {

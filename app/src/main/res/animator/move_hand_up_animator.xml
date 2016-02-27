@@ -7,17 +7,12 @@
     -->
     <objectAnimator
         android:duration="1000"
-        android:propertyName="fillAlpha"
-        android:valueFrom="0"
-        android:valueTo="0"/>
+        android:propertyName="translateY"
+        android:valueFrom="24"
+        android:valueTo="24"/>
     <objectAnimator
-        android:duration="600"
-        android:propertyName="fillAlpha"
-        android:valueFrom="0"
-        android:valueTo="1"/>
-    <objectAnimator
-        android:duration="600"
-        android:propertyName="fillAlpha"
-        android:valueFrom="1"
+        android:duration="1200"
+        android:propertyName="translateY"
+        android:valueFrom="24"
         android:valueTo="0"/>
 </set>
