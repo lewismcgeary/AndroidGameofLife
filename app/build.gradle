@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId 'io.github.lewismcgeary.androidgameoflife'
-        minSdkVersion 11
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 5
         versionName "0.96"
