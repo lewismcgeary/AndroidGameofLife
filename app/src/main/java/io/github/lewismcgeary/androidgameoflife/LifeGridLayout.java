@@ -78,6 +78,11 @@ public class LifeGridLayout extends GridLayout {
             long touchEventCurrentTime;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                //if cellPixelSize is zero, grid has not been fully initialised so don't continue
+                //touch event
+                if (cellPixelSize == 0){
+                    return false;
+                }
                 //calculate the grid position based on finger location on the screen
                 int xGridPosition = (int) (event.getX() - leftOrigin) / cellPixelSize;
                 int yGridPosition = (int) (event.getY() - topOrigin) / cellPixelSize;
