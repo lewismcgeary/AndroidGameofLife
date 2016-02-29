@@ -6,4 +6,6 @@
 
     <string name="live_cell_path">M0,0 L24,0 24,24 0,24 z</string>
     <string name="scale_group_name">scale group</string>
+
+    <string name="fab_anim_time">400</string>
 </resources>
