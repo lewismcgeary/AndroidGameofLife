@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        showButtonInStartMode();
         startResetFab.hide();
         appBarLayout.setExpanded(true, true);
         setFixedScreenOrientation(false);
@@ -87,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
             @Override
             public void onClick(View v) {
                 if (startResetFab.getTag().equals(startButtonText)) {
-                    showButtonInResetMode();
                     lifeGridFragment.worldGridPresenter.passLiveCellsToModelAndStartGame();
                 } else {
                     showButtonInStartMode();
@@ -209,12 +207,17 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
         ViewGroup group = (ViewGroup) snack.getView();
         group.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         snack.show();
-        showButtonInStartMode();
+    }
+
+    @Override
+    public void gameStarted() {
+        showButtonInResetMode();
     }
 
     @Override
     public void letsPlay() {
         setFixedScreenOrientation(true);
+        showButtonInStartMode();
         startTransition();
     }
 

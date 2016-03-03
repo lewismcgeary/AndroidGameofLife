@@ -36,6 +36,7 @@ public class GridPresenter {
             worldGrid.setInitialLiveCells(userSelectedCells);
             startConstantUpdate();
             worldGridLayout.setEnabled(false);
+            worldGridLayout.gameStarted();
         } else {
             worldGridLayout.noCellsWereSelected();
         }

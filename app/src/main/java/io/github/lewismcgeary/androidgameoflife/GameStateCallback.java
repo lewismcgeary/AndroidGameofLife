@@ -12,4 +12,6 @@ public interface GameStateCallback {
     void cellDrawingInProgress();
 
     void cellDrawingFinished();
+
+    void gameStarted();
 }
