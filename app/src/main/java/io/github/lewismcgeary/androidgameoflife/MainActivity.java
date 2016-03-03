@@ -2,13 +2,13 @@ package io.github.lewismcgeary.androidgameoflife;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
     FloatingActionButton startResetFab;
     String startButtonText;
     String resetButtonText;
-    Drawable playIcon;
-    Drawable resetIcon;
+    AnimatedVectorDrawableCompat playIcon;
+    AnimatedVectorDrawableCompat resetIcon;
     Snackbar snack;
 
     LifeGridFragment lifeGridFragment;
@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        showButtonInStartMode();
         startResetFab.hide();
         appBarLayout.setExpanded(true, true);
         setFixedScreenOrientation(false);
@@ -81,13 +80,12 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
         startResetFab = (FloatingActionButton)findViewById(R.id.start_reset_fab);
         startButtonText = getString(R.string.start_button_text);
         resetButtonText = getString(R.string.reset_button_text);
-        playIcon = ContextCompat.getDrawable(this, R.drawable.ic_play_arrow_24dp);
-        resetIcon = ContextCompat.getDrawable(this, R.drawable.ic_replay_24dp);
+        playIcon = AnimatedVectorDrawableCompat.create(this, R.drawable.fab_reset_to_play_animated_vector);
+        resetIcon = AnimatedVectorDrawableCompat.create(this, R.drawable.fab_play_to_reset_animated_vector);
         startResetFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (startResetFab.getTag().equals(startButtonText)) {
-                    showButtonInResetMode();
                     lifeGridFragment.worldGridPresenter.passLiveCellsToModelAndStartGame();
                 } else {
                     showButtonInStartMode();
@@ -101,11 +99,13 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
     private void showButtonInStartMode(){
         startResetFab.setTag(startButtonText);
         startResetFab.setImageDrawable(playIcon);
+        playIcon.start();
     }
 
     private void showButtonInResetMode(){
         startResetFab.setTag(resetButtonText);
         startResetFab.setImageDrawable(resetIcon);
+        resetIcon.start();
     }
 
     private void startTransition(){
@@ -207,12 +207,17 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
         ViewGroup group = (ViewGroup) snack.getView();
         group.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         snack.show();
-        showButtonInStartMode();
+    }
+
+    @Override
+    public void gameStarted() {
+        showButtonInResetMode();
     }
 
     @Override
     public void letsPlay() {
         setFixedScreenOrientation(true);
+        showButtonInStartMode();
         startTransition();
     }
 

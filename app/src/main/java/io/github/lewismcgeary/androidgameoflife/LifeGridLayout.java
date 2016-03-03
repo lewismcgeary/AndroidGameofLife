@@ -177,6 +177,10 @@ public class LifeGridLayout extends GridLayout {
     public void cellsDiedGameOver(){
         gameStateCallback.gameOver();
     }
+
+    public void gameStarted() {
+        gameStateCallback.gameStarted();
+    }
     //can disable this as no scrolling needed
     @Override
     public boolean shouldDelayChildPressedState() {

@@ -142,6 +142,11 @@ public class LifeGridFragment extends Fragment implements GameStateCallback {
         mListener.cellDrawingFinished();
     }
 
+    @Override
+    public void gameStarted() {
+        mListener.gameStarted();
+    }
+
     public interface OnFragmentInteractionListener {
 
         void gameOver();
@@ -151,5 +156,7 @@ public class LifeGridFragment extends Fragment implements GameStateCallback {
         void cellDrawingInProgress();
 
         void cellDrawingFinished();
+
+        void gameStarted();
     }
 }
