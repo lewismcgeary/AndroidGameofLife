@@ -54,7 +54,7 @@ public class LifeGridFragment extends Fragment implements GameStateCallback {
         //wait until layout is drawn before running setup calculations on its measurements
         worldGridLayout.getViewTreeObserver().addOnGlobalLayoutListener(listener);
         ImageView touchIcon = (ImageView)view.findViewById(R.id.touch_icon);
-        AnimatedVectorDrawableCompat touchAnimation = AnimatedVectorDrawableCompat.create(getContext(), R.drawable.touch_animated_vector);
+        AnimatedVectorDrawableCompat touchAnimation = AnimatedVectorDrawableCompat.create(getContext(), R.drawable.hand_animated_vector);
         touchIcon.setImageDrawable(touchAnimation);
         touchAnimation.start();
         return view;
