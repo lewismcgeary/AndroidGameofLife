@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:layout_gravity="end|bottom"
-        app:srcCompat="@drawable/ic_play_arrow_24dp"
+        app:srcCompat="@drawable/fab_ic_play_arrow_24dp"
         android:tag="@string/start_button_text"
         app:elevation="@dimen/floating_action_button_elevation"
         android:visibility="gone"/>
