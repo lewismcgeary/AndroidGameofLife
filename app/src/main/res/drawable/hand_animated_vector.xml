@@ -5,10 +5,10 @@
         android:animation="@animator/fade_in_fade_out"
         android:name="touch icon"/>
     <target
-        android:animation="@animator/move_hand_right_animator"
+        android:animation="@animator/hand_move_right"
         android:name="move hand"/>
     <target
-        android:animation="@animator/move_hand_up_animator"
+        android:animation="@animator/hand_move_up"
         android:name="move hand"/>
 
 </animated-vector>

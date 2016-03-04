@@ -2,6 +2,6 @@
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/cell_vector_drawable_dead">
     <target
-        android:animation="@animator/cell_born_animator"
+        android:animation="@animator/cell_grow"
         android:name="@string/scale_group_name"/>
 </animated-vector>
