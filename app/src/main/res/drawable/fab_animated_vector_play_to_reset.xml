@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector
-    android:drawable="@drawable/fab_ic_play_arrow_24dp"
+    android:drawable="@drawable/fab_icon_play"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <target

@@ -2,7 +2,7 @@
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/hand_icon">
     <target
-        android:animation="@animator/fade_in_fade_out"
+        android:animation="@animator/hand_fade_in_fade_out"
         android:name="touch icon"/>
     <target
         android:animation="@animator/hand_move_right"

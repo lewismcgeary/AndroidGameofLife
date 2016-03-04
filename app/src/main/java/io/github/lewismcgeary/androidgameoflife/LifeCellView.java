@@ -25,7 +25,7 @@ public class LifeCellView extends ImageView {
 
     private void initialiseDrawables(Context context){
         setImageResource(R.drawable.cell_vector_drawable_dead);
-        animatedCellDrawableBorn = AnimatedVectorDrawableCompat.create(context, R.drawable.cell_animated_vector);
+        animatedCellDrawableBorn = AnimatedVectorDrawableCompat.create(context, R.drawable.cell_animated_vector_born);
         animatedCellDrawableDie = AnimatedVectorDrawableCompat.create(context, R.drawable.cell_animated_vector_die);
     }
 
