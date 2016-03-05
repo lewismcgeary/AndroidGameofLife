@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:name="whole cell alpha"
     android:width="@dimen/cell_size"
     android:height="@dimen/cell_size"
     android:alpha="1"

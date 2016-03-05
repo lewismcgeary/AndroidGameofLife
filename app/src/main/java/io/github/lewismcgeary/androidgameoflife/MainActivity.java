@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity implements IntroFragment.OnF
         startResetFab = (FloatingActionButton)findViewById(R.id.start_reset_fab);
         startButtonText = getString(R.string.start_button_text);
         resetButtonText = getString(R.string.reset_button_text);
-        playIcon = AnimatedVectorDrawableCompat.create(this, R.drawable.fab_reset_to_play_animated_vector);
-        resetIcon = AnimatedVectorDrawableCompat.create(this, R.drawable.fab_play_to_reset_animated_vector);
+        playIcon = AnimatedVectorDrawableCompat.create(this, R.drawable.fab_animated_vector_reset_to_play);
+        resetIcon = AnimatedVectorDrawableCompat.create(this, R.drawable.fab_animated_vector_play_to_reset);
         startResetFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

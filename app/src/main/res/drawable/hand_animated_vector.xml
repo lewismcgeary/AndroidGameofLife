@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/hand_icon">
+    <target
+        android:animation="@animator/hand_fade_in_fade_out"
+        android:name="@string/hand_icon_pathname"/>
+    <target
+        android:animation="@animator/hand_move_right"
+        android:name="@string/hand_icon_move_group"/>
+    <target
+        android:animation="@animator/hand_move_up"
+        android:name="@string/hand_icon_move_group"/>
+
+</animated-vector>

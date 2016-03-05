@@ -7,5 +7,13 @@
     <string name="live_cell_path">M0,0 L24,0 24,24 0,24 z</string>
     <string name="scale_group_name">scale group</string>
 
-    <string name="fab_anim_time">400</string>
+
+    <integer name="fab_anim_time">400</integer>
+    <string name="arrow_tail_pathname">arrow tail</string>
+    <string name="arrowhead_groupname">arrow head group</string>
+    <string name="whole_icon_rotation_group">rotation group</string>
+
+
+    <string name="hand_icon_pathname">hand icon</string>
+    <string name="hand_icon_move_group">move hand</string>
 </resources>

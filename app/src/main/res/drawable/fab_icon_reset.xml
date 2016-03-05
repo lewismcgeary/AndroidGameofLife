@@ -8,14 +8,14 @@
         android:pivotY="12">
 
     <path
-        android:name="arrow tail"
+        android:name="@string/arrow_tail_pathname"
         android:strokeColor="#000000"
         android:strokeWidth="2"
         android:pathData=
             "M12,6 c3.9,0 7,3.135 7,7 s-3.135,7 -7,7 -7,-3.135 -7,-7"
         />
         <group
-            android:name="arrow head group"
+            android:name="@string/arrowhead_groupname"
             android:rotation="180"
             android:pivotX="10.75"
             android:pivotY="8.5"

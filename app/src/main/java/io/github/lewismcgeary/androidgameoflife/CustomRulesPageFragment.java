@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CustomAppIntroFragment extends Fragment {
+public class CustomRulesPageFragment extends Fragment {
 
     private static final String ARG_TITLE = "title";
     private static final String ARG_DESC = "desc";
@@ -24,13 +24,13 @@ public class CustomAppIntroFragment extends Fragment {
     private static final String ARG_TITLE_COLOR = "title_color";
     private static final String ARG_DESC_COLOR = "desc_color";
 
-    public static CustomAppIntroFragment newInstance(CharSequence title, CharSequence description, int imageDrawable, int bgColor) {
+    public static CustomRulesPageFragment newInstance(CharSequence title, CharSequence description, int imageDrawable, int bgColor) {
         return newInstance(title, description, imageDrawable, bgColor, 0, 0);
     }
 
 
-    public static CustomAppIntroFragment newInstance(CharSequence title, CharSequence description, int imageDrawable, int bgColor, int titleColor, int descColor) {
-        CustomAppIntroFragment sampleSlide = new CustomAppIntroFragment();
+    public static CustomRulesPageFragment newInstance(CharSequence title, CharSequence description, int imageDrawable, int bgColor, int titleColor, int descColor) {
+        CustomRulesPageFragment sampleSlide = new CustomRulesPageFragment();
 
         Bundle args = new Bundle();
         args.putCharSequence(ARG_TITLE, title);
@@ -47,7 +47,7 @@ public class CustomAppIntroFragment extends Fragment {
     private int drawable, bgColor, titleColor, descColor;
     private CharSequence title, description;
 
-    public CustomAppIntroFragment() {
+    public CustomRulesPageFragment() {
     }
 
     @Override
@@ -67,7 +67,7 @@ public class CustomAppIntroFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_intro_custom, container, false);
+        View v = inflater.inflate(R.layout.fragment_rules_custom, container, false);
         TextView t = (TextView) v.findViewById(R.id.title);
         TextView d = (TextView) v.findViewById(R.id.description);
         ImageView i = (ImageView) v.findViewById(R.id.image);
