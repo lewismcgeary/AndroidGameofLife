@@ -2,8 +2,8 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 <objectAnimator
     android:propertyName="rotation"
-    android:startOffset="@string/fab_anim_time"
-    android:duration="@string/fab_anim_time"
+    android:startOffset="@integer/fab_anim_time"
+    android:duration="@integer/fab_anim_time"
     android:valueFrom="0"
     android:valueTo="-360"
     android:interpolator="@android:interpolator/decelerate_cubic"

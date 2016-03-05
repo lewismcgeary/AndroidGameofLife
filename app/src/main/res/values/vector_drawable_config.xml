@@ -8,7 +8,7 @@
     <string name="scale_group_name">scale group</string>
 
 
-    <string name="fab_anim_time">400</string>
+    <integer name="fab_anim_time">400</integer>
     <string name="arrow_tail_pathname">arrow tail</string>
     <string name="arrowhead_groupname">arrow head group</string>
     <string name="whole_icon_rotation_group">rotation group</string>

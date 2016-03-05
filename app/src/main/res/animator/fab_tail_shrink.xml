@@ -4,6 +4,6 @@
     android:valueFrom="1"
     android:valueTo="0"
     android:valueType="floatType"
-    android:duration="@string/fab_anim_time"
+    android:duration="@integer/fab_anim_time"
     android:interpolator="@android:interpolator/accelerate_cubic"/>
 </set>
