@@ -5,12 +5,12 @@
 
     <target
         android:animation="@animator/fab_play_to_arrowhead"
-        android:name="arrow head group"/>
+        android:name="@string/arrowhead_groupname"/>
     <target
         android:animation="@animator/fab_rotate_reset_arrow"
-        android:name="rotation group"/>
+        android:name="@string/whole_icon_rotation_group"/>
     <target
         android:animation="@animator/fab_tail_grow"
-        android:name="arrow tail"/>
+        android:name="@string/arrow_tail_pathname"/>
 
     </animated-vector>

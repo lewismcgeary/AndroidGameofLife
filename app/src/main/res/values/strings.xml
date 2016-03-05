@@ -4,7 +4,6 @@
     <string name="reset_button_text">Reset</string>
 
     <string name="card_view_transition_name">transition_card_view</string>
-    <string name="fab_transition_name">transition_fab</string>
 
     <string name="introduction_text">This is an example of Conway\'s Game of Life.
         \n
@@ -14,9 +13,10 @@
 
     <string name="starting_blank_game_snackbar_text">Touch the screen to select some cells first!</string>
     <string name="game_over_snackbar_text">They\'re dead, Jim</string>
-    <string name="logo_transition_name">transition_logo</string>
+
     <string name="lets_play_button_text">Let\'s Play</string>
     <string name="read_rules_button_text">Learn More</string>
+
     <string name="rules_summary_title">Game of Life</string>
     <string name="rules_summary_text">In the Game of Life, the world is a grid of cells that are dead or alive. \n \nThis is a zero-player game.\n \nYou decide which cells are alive at the start of the game, but when play starts, the world evolves on its own following some simple rules...</string>
     <string name="rules_fewer_than_two_title">Loneliness</string>
@@ -27,5 +27,4 @@
     <string name="rules_greater_than_three_text">A cell with more than three live neighbours dies</string>
     <string name="rules_exactly_three_title">Conception</string>
     <string name="rules_exactly_three_text">A dead cell with exactly three live neighbours comes to life</string>
-
 </resources>
