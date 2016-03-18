@@ -7,8 +7,8 @@ android {
         applicationId 'io.github.lewismcgeary.androidgameoflife'
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 6
-        versionName "0.97"
+        versionCode 7
+        versionName "0.98"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
